@@ -37,6 +37,9 @@ jobs:
 
       - name: Generate test database
         run: pnpm prisma db push --schema=prisma/schema.prisma
+        env:
+          TZ: UTC
+          DATABASE_URL: "file:../test.db?connection_limit=1"
 
       - name: Run Vitest
         run: pnpm test
