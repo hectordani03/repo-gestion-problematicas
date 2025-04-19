@@ -1,0 +1,48 @@
+name: Infrastructure Layer Tests
+
+on:
+  push:
+    paths:
+      - "packages/infrastructure/**"
+  pull_request:
+    paths:
+      - "packages/infrastructure/**"
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: packages/infrastructure
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 10.7.1
+          run_install: false
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: "pnpm"
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Generate test database
+        run: pnpm prisma db push --schema=prisma/schema.prisma
+        env:
+          TZ: UTC
+          DATABASE_URL: "file:../test.db?connection_limit=1"
+
+      - name: Run Vitest
+        run: pnpm test
+        env:
+          TZ: UTC
+          DATABASE_URL: "file:../test.db?connection_limit=1"
