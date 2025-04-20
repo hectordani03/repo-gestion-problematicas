@@ -13,7 +13,7 @@ apps/
         ├── layouts/             # Layouts generales (AuthLayout, MainLayout, etc.)
         ├── pages/               # Páginas globales (404, Home, Landing)
         ├── routes/              # Definición de rutas (React Router)
-        ├── services/            # API calls (fetch/axios), opcionalmente puedes mover a libs/api
+        ├── services/            # API calls (fetch/axios), opcionalmente las podriamos mover a libs/api
         ├── hooks/               # Custom hooks globales
         ├── context/             # React Contexts (AuthContext, ThemeContext...)
         ├── styles/              # Archivos CSS globales (aquí importa Tailwind)
