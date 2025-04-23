@@ -1,19 +1,20 @@
-import React from 'react'
-import Sidebar from '../components/Sidebar'
-import Header from '../components/Header'
-import DashboardMain from '../features/dashboard/pages/DashboardMain'
-import Timeline from '../features/dashboard/components/Timeline'
-
-
-export default function DashboardLayout() {
+import { Outlet } from 'react-router-dom'
+import Sidebar from '@/components/Sidebar'
+import Header from '@/components/Header'
+import Timeline from '@/features/dashboard/components/Timeline'
+const DashboardLayout = () => {
   return (
     <>
-        <Header />
-        <main className='flex gap-3'>
-          <Sidebar />
-          <DashboardMain />
+      <Header />
+      <main className="flex gap-3">
+        <Sidebar />
+        <div className="flex flex-1">
+          <Outlet />
           <Timeline />
-        </main>
+        </div>
+      </main>
     </>
   )
 }
+
+export default DashboardLayout

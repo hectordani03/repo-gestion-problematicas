@@ -1,13 +1,8 @@
-import './styles/App.css'
-import DashboardLayout from './layouts/DashboardLayout'
+// src/App.jsx
+import AppRouter from './routes/AppRouter'
 
-// POR AHORA LO PUSE AQUI PARA VISUALZARLO, FALTA HACER RUTEO (PUEDEN IR HACIENDO LO MISMO)
-function App() {
-  return (
-    <>
-      <DashboardLayout />
-    </>
-  )
+const App = () => {
+  return <AppRouter />
 }
 
 export default App
