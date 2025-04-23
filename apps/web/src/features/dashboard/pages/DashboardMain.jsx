@@ -6,7 +6,7 @@ import ProjectSummary from '../components/ProjectSummary'
 
 const DashboardMain = () => {
   return (
-    <div className="p-4 grid gap-4 xl:grid-cols-3 w-8/12">
+    <div className="p-4 grid gap-4 xl:grid-cols-3 w-9/12">
       <div className="col-span-3 items-start">
         <ProjectStats />
       </div>
