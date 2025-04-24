@@ -1,7 +1,7 @@
 {
-  "name": "api",
+  "name": "@reuc/presentation",
   "version": "1.0.0",
-  "description": "",
+  "type": "module",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -16,6 +16,7 @@
     "cors": "^2.8.5",
     "csurf": "^1.11.0",
     "dotenv": "^16.4.7",
-    "express": "^5.1.0"
+    "express": "^5.1.0",
+    "@reuc/application": "workspace:*"
   }
 }
