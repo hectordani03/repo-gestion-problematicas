@@ -23,6 +23,15 @@ app.use(
 );
 app.use(express.json());
 
+// Logs all incoming requests
+app.use((req, res, next) => {
+  console.log(`[${req.method}] ${req.originalUrl}`);
+  if (typeof req.body !== "undefined" && Object.keys(req.body).length) {
+    console.log("Body:", req.body);
+  }
+  next();
+});
+
 // Rutas Auth
 app.use("/auth", authRouter);
 
