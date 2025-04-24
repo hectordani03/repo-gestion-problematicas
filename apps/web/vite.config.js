@@ -13,7 +13,12 @@ export default defineConfig({
   },
   server: {
     proxy: {
-      "/auth": "http://localhost:3000",
+      "/auth": {
+        target: "http://localhost:3000",
+        changeOrigin: true,
+        secure: false,
+        logLevel: "debug",
+      },
       "/csrf-token": "http://localhost:3000",
     },
   },
