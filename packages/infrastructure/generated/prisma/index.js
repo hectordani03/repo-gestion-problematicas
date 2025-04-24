@@ -189,7 +189,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "/home/zama/Documents/reuc/packages/infrastructure/generated/prisma",
+      "value": "/home/zama/Documents/ReUC/packages/infrastructure/generated/prisma",
       "fromEnvVar": null
     },
     "config": {
@@ -198,17 +198,16 @@ const config = {
     "binaryTargets": [
       {
         "fromEnvVar": null,
-        "value": "linux-arm64-openssl-3.0.x",
+        "value": "debian-openssl-3.0.x",
         "native": true
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "/home/zama/Documents/reuc/packages/infrastructure/prisma/schema.prisma",
+    "sourceFilePath": "/home/zama/Documents/ReUC/packages/infrastructure/prisma/schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
-    "rootEnvPath": null,
-    "schemaEnvPath": "../../.env"
+    "rootEnvPath": null
   },
   "relativePath": "../../prisma",
   "clientVersion": "6.6.0",
@@ -217,11 +216,12 @@ const config = {
     "db"
   ],
   "activeProvider": "sqlite",
+  "postinstall": false,
   "inlineDatasources": {
     "db": {
       "url": {
         "fromEnvVar": "DATABASE_URL",
-        "value": "file:../test/test.db?connection_limit=1"
+        "value": null
       }
     }
   },
@@ -265,8 +265,8 @@ exports.PrismaClient = PrismaClient
 Object.assign(exports, Prisma)
 
 // file annotations for bundling tools to include these files
-path.join(__dirname, "libquery_engine-linux-arm64-openssl-3.0.x.so.node");
-path.join(process.cwd(), "generated/prisma/libquery_engine-linux-arm64-openssl-3.0.x.so.node")
+path.join(__dirname, "libquery_engine-debian-openssl-3.0.x.so.node");
+path.join(process.cwd(), "generated/prisma/libquery_engine-debian-openssl-3.0.x.so.node")
 // file annotations for bundling tools to include these files
 path.join(__dirname, "schema.prisma");
 path.join(process.cwd(), "generated/prisma/schema.prisma")

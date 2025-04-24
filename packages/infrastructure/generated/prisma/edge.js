@@ -188,7 +188,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "/home/zama/Documents/reuc/packages/infrastructure/generated/prisma",
+      "value": "/home/zama/Documents/ReUC/packages/infrastructure/generated/prisma",
       "fromEnvVar": null
     },
     "config": {
@@ -197,17 +197,16 @@ const config = {
     "binaryTargets": [
       {
         "fromEnvVar": null,
-        "value": "linux-arm64-openssl-3.0.x",
+        "value": "debian-openssl-3.0.x",
         "native": true
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "/home/zama/Documents/reuc/packages/infrastructure/prisma/schema.prisma",
+    "sourceFilePath": "/home/zama/Documents/ReUC/packages/infrastructure/prisma/schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
-    "rootEnvPath": null,
-    "schemaEnvPath": "../../.env"
+    "rootEnvPath": null
   },
   "relativePath": "../../prisma",
   "clientVersion": "6.6.0",
@@ -216,11 +215,12 @@ const config = {
     "db"
   ],
   "activeProvider": "sqlite",
+  "postinstall": false,
   "inlineDatasources": {
     "db": {
       "url": {
         "fromEnvVar": "DATABASE_URL",
-        "value": "file:../test/test.db?connection_limit=1"
+        "value": null
       }
     }
   },
