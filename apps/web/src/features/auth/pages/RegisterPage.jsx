@@ -8,7 +8,7 @@ import useRegister from '../hooks/useRegister';
 import registerImage from '@/assets/register-image.png';
 
 const RegisterPage = () => {
-  const { form, handleChange, handleSubmit } = useRegister();
+  const { form, error, handleChange, handleSubmit } = useRegister();
   const [showStudentField, setShowStudentField] = useState(false);
   const [studentId, setStudentId] = useState('');
 
@@ -28,8 +28,13 @@ const RegisterPage = () => {
           </p>
         </div>
 
+        {error && (
+          <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4">
+            {error}
+          </div>
+        )}
         <AuthForm onSubmit={handleSubmit}>
-          <AuthInput label="Nombre de usuario" name="username" value={form.username} onChange={handleChange} />
+          {/* <AuthInput label="Nombre de usuario" name="username" value={form.username} onChange={handleChange} /> */}
           <AuthInput label="Correo electrónico" name="email" value={form.email} onChange={handleChange} />
           {showStudentField && (
             <div className="transition-all duration-300 opacity-100">
@@ -49,7 +54,8 @@ const RegisterPage = () => {
           <AuthInput label="Contraseña" name="password" type="password" value={form.password} onChange={handleChange} />
           <AuthInput label="Confirmar contraseña" name="confirmPassword" type="password" value={form.confirmPassword} onChange={handleChange} />
           <Checkbox />
-          <SubmitBtn text='Registrarse' link='/login' />
+          {/* <SubmitBtn text='Registrarse' link='/login' /> */}
+          <SubmitBtn text='Registrarse'/>
           <hr className='text-lime-600 my-3' />
           <AltLink href="/login" text='¿Ya tienes una cuenta?' link='Inicia sesión' />
         </AuthForm>

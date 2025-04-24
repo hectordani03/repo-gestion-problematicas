@@ -1,6 +1,10 @@
 {
   "name": "@reuc/domain",
   "version": "1.0.0",
+  "type": "module",
   "main": "index.js",
-  "type": "module"
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "@reuc/infrastructure": "workspace:*"
+  }
 }

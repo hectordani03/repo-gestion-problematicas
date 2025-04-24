@@ -1,13 +1,32 @@
-import { useState } from 'react';
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { register } from "../authService.js";
 
-const useRegister = () => {
-  const [form, setForm] = useState({ fullName: '', email: '', username: '', password: '', confirmPassword: '' });
-  const handleChange = e => setForm({ ...form, [e.target.name]: e.target.value });
-  const handleSubmit = e => {
+export default function useRegister() {
+  const [form, setForm] = useState({
+    email: "",
+    password: "",
+    confirmPassword: "",
+  });
+
+  const [error, setError] = useState(null);
+  const navigate = useNavigate();
+
+  const handleChange = (e) =>
+    setForm({ ...form, [e.target.name]: e.target.value });
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Registrando...', form);
-  };
-  return { form, handleChange, handleSubmit };
-};
+    setError(null);
 
-export default useRegister;
+    const response = await register(form);
+
+    if (!response.success) {
+      setError(response.err);
+    } else {
+      navigate("/dashboard");
+    }
+  };
+
+  return { form, error, handleChange, handleSubmit };
+}

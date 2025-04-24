@@ -1,8 +1,8 @@
 {
   "name": "@reuc/infrastructure",
   "version": "1.0.0",
-  "main": "index.js",
   "type": "module",
+  "main": "index.js",
   "dependencies": {
     "@prisma/client": "^6.6.0",
     "prisma": "^6.6.0"
