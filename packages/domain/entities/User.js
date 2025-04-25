@@ -3,6 +3,7 @@ export class User {
     uuid_user = undefined,
     email,
     password,
+    studentId = undefined,
     firstName = undefined,
     middleName = undefined,
     lastName = undefined,
@@ -12,6 +13,7 @@ export class User {
   }) {
     this.email = email.toLowerCase();
     this.password = password;
+    this.studentId = studentId;
 
     if (status != undefined && typeof status != "number")
       throw new Error("Status must be a number");
