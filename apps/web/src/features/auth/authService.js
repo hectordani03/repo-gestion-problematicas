@@ -23,14 +23,42 @@ export async function register(data) {
     body: JSON.stringify(data),
   });
 
+  const bodyRes = await res.json();
+
   if (!res.ok) {
-    const errorRes = await res.json();
     const msg =
-      res.status !== "422" ? errorRes.err : "Hubo un problema en el registro";
+      res.status !== "422" ? bodyRes.err : "Hubo un problema en el registro";
 
     return { success: false, err: msg };
   }
 
-  const dataRes = await res.json();
-  return { success: true, data: dataRes };
+  return { success: true, data: bodyRes };
+}
+
+export async function login(data) {
+  const csrfToken = await getCSRFToken();
+  console.log("login to api");
+
+  const res = await fetch(`${API_URL}/auth/login`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "X-CSRF-Token": csrfToken,
+    },
+    credentials: "include",
+    body: JSON.stringify(data),
+  });
+  console.log("process login response from api");
+
+  const bodyRes = await res.json();
+
+  if (!res.ok) {
+    const msg =
+      res.status !== "422" ? bodyRes.err : "Hubo un problema en el login";
+
+    return { success: false, err: msg };
+  }
+  console.log(bodyRes);
+
+  return { success: true, data: bodyRes.data.user };
 }

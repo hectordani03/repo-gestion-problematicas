@@ -13,7 +13,7 @@ import appStoreImage from '@/assets/app-store.png';
 import googlePlayImage from '@/assets/play-store.png';
 
 const LoginPage = () => {
-  const { form, handleChange, handleSubmit } = useLogin();
+  const { form, error, handleChange, handleSubmit } = useLogin();
 
   return (
     <section className='flex items-center justify-between h-full w-full ml-20'>
@@ -22,7 +22,13 @@ const LoginPage = () => {
             <h2 className="text-5xl font-bold">Bienvenido a <span className='text-5xl font-extrabold text-lime-600'>ReUC</span> </h2>
             <p className="text-gray-800 font-semibold text-2xl w-8/12">Accede a tu cuenta para continuar explorando el repositorio</p>
           </div>
-          <AuthForm>
+
+          {error && (
+            <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4">
+              {error}
+            </div>
+          )}
+          <AuthForm onSubmit={handleSubmit}>
             <AuthInput label="Correo electrónico" name="email" value={form.email} onChange={handleChange} />
             <AuthInput label="Contraseña" name="password" type="password" value={form.password} onChange={handleChange} />
             <AltLink href="/register" text='No tienes una cuenta?' link='Registrate' />
