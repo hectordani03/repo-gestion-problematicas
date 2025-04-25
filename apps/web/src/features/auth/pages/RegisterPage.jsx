@@ -1,5 +1,5 @@
+// src/features/auth/pages/RegisterPage.jsx
 import React from "react";
-import Swal from "sweetalert2";
 import AuthForm from "../components/AuthForm";
 import AuthInput from "../components/AuthInput";
 import Checkbox from "../components/Checkbox";
@@ -10,18 +10,18 @@ import registerImage from "@/assets/register-image.png";
 
 const RegisterPage = () => {
   const { form, handleChange, handleSubmit, isLoading } = useRegister();
-  // Control de campo estudiante solo si es @ucol.mx
   const showStudentField = form.email.includes("@ucol.mx");
 
   return (
     <section className="flex items-center justify-between h-full w-full ml-20">
-      <div className="flex flex-col items-start justify-start gap-10 w-6/12 h-full mt-10">
-        <div className="flex flex-col gap-4 justify-between w-8/12 text-start">
+      <div className="flex flex-col items-start gap-10 w-6/12 mt-10">
+        {/* Título */}
+        <div className="mb-8">
           <h2 className="text-5xl font-bold">
             Únete a{" "}
             <span className="text-5xl font-extrabold text-lime-600">ReUC</span>
           </h2>
-          <p className="text-gray-800 font-semibold text-2xl w-8/12">
+          <p className="text-2xl font-semibold text-gray-800 mt-2">
             Regístrate para empezar a guardar y explorar contenido
           </p>
         </div>
@@ -33,14 +33,16 @@ const RegisterPage = () => {
             value={form.email}
             onChange={handleChange}
           />
+
           {showStudentField && (
             <AuthInput
-              label="Número de cuenta (8 para alumnos, 6 para maestros)"
+              label="Número de cuenta (8 alumnos / 6 maestros)"
               name="studentId"
               value={form.studentId}
               onChange={handleChange}
             />
           )}
+
           <AuthInput
             label="Contraseña"
             name="password"
@@ -48,6 +50,7 @@ const RegisterPage = () => {
             value={form.password}
             onChange={handleChange}
           />
+
           <AuthInput
             label="Confirmar contraseña"
             name="confirmPassword"
@@ -57,17 +60,17 @@ const RegisterPage = () => {
           />
 
           <div className="mt-4">
-              <Checkbox
-                name="acceptTerms"
-                checked={form.acceptTerms}
-                onChange={handleChange}
-              />
+            <Checkbox
+              name="acceptTerms"
+              checked={form.acceptTerms}
+              onChange={handleChange}
+            />
           </div>
 
-          <SubmitBtn text='Registrarse' isLoading={isLoading} />
-
+          <SubmitBtn text="Registrarse" isLoading={isLoading} />
 
           <hr className="my-3 border-lime-600" />
+
           <AltLink
             href="/login"
             text="¿Ya tienes una cuenta?"

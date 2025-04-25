@@ -14,9 +14,19 @@ export default function useRegister() {
     acceptTerms: false,
     studentId: "",
   });
-
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
+
+  const showError = (msg) =>
+    MySwal.fire({
+      toast: true,
+      position: "bottom-end",
+      icon: "error",
+      title: msg,
+      showConfirmButton: false,
+      timer: 3000,
+      timerProgressBar: true,
+    });
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -30,64 +40,48 @@ export default function useRegister() {
     e.preventDefault();
     setIsLoading(true);
 
-    // Validación del checkbox
     if (!form.acceptTerms) {
       showError("Debes aceptar los términos y condiciones");
       setIsLoading(false);
       return;
     }
 
-    const isUcolEmail = form.email.endsWith("@ucol.mx");
+    if (!form.email.trim()) {
+      showError("El correo es obligatorio");
+      setIsLoading(false);
+      return;
+    }
+    if (!form.password) {
+      showError("La contraseña es obligatoria");
+      setIsLoading(false);
+      return;
+    }
+    if (!form.confirmPassword) {
+      showError("Confirma tu contraseña");
+      setIsLoading(false);
+      return;
+    }
 
-    if (isUcolEmail) {
-      const studentId = form.studentId?.trim();
-
-      if (!studentId) {
-        showError("Ingresa tu número de cuenta.");
-        setIsLoading(false);
-        return;
-      }
-
-      if (studentId.length !== 8 && studentId.length !== 6) {
-        showError("El número de cuenta debe tener 8 dígitos (alumno) o 6 (maestro).");
-        setIsLoading(false);
-        return;
-      }
-
-      if (!/^\d+$/.test(studentId)) {
-        showError("El número de cuenta solo debe contener números.");
-        setIsLoading(false);
-        return;
-      }
+    if (form.email.includes("@ucol.mx") && !form.studentId.trim()) {
+      showError("Ingresa tu número de cuenta");
+      setIsLoading(false);
+      return;
     }
 
     try {
       const response = await register(form);
-
       if (!response.success) {
-        showError(response.err || "Error desconocido");
-        setIsLoading(false);
+        showError(response.err || "Error en el registro");
         return;
       }
-
       navigate("/dashboard");
     } catch (err) {
+      // errores de ValidationError o inesperados
       showError(err.message || "Algo salió mal");
     } finally {
       setIsLoading(false);
     }
   };
-
-  const showError = (msg) =>
-    MySwal.fire({
-      toast: true,
-      position: "bottom-end",
-      icon: "error",
-      title: msg,
-      showConfirmButton: false,
-      timer: 3000,
-      timerProgressBar: true,
-    });
 
   return { form, handleChange, handleSubmit, isLoading };
 }
