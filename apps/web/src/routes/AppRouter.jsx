@@ -10,6 +10,7 @@ import NotFound from '@/pages/404'
 import PlainLayout from '@/layouts/PlainLayout'
 import AuthLayout from '@/layouts/AuthLayout'
 import DashboardLayout from '@/layouts/DashboardLayout'
+import ProfilePage from '@/features/profile/pages/ProfilePage'
 
 const AppRouter = () => {
   return (
@@ -29,6 +30,7 @@ const AppRouter = () => {
       <Route element={<DashboardLayout />}>
         <Route path="/dashboard" element={<DashboardMain />} />
         {/* Aquí puedes anidar más rutas como /dashboard/proyectos */}
+        <Route path="/profile" element={<ProfilePage />} />
       </Route>
 
       {/* 404 */}
