@@ -28,6 +28,7 @@ model User {
   lastName    String?      @map("last_name")
   status      Int?         @map("user_status_id")
   userStatus  User_Status? @relation(fields: [status], references: [user_status_id])
+  lastLoginIp String?      @map("last_login_ip")
   lastLoginAt DateTime?    @map("last_login_at")
   createdAt   DateTime     @default(now()) @map("created_at")
   updatedAt   DateTime     @updatedAt @map("updated_at")
