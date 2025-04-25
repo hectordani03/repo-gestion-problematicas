@@ -27,14 +27,14 @@ export async function register(data) {
   }
 }
 
-function validateEmail(email) {
+export function validateEmail(email) {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   if (!email) return "Email necesario para registro.";
   if (!emailRegex.test(email)) return "Email no valido.";
   return null;
 }
 
-function validatePassword(password) {
+export function validatePassword(password) {
   if (!password) return "Contraseña necesaria para el registro.";
   if (password.length < 8) return "Contraseña de al menos 8 caracteres.";
   if (!/[A-Z]/.test(password))

@@ -7,9 +7,10 @@ export class User {
     middleName = undefined,
     lastName = undefined,
     status = undefined,
+    lastLoginIp = undefined,
     lastLoginAt = undefined,
   }) {
-    this.email = email;
+    this.email = email.toLowerCase();
     this.password = password;
 
     if (status != undefined && typeof status != "number")
@@ -20,6 +21,7 @@ export class User {
     this.middleName = middleName;
     this.lastName = lastName;
     this.status = status;
+    this.lastLoginIp = lastLoginIp;
     this.lastLoginAt = lastLoginAt;
   }
 
