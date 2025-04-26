@@ -1,2 +1,30 @@
 @import "tailwindcss";
 
+/* Variables */
+@theme {
+    /* Degradado progresivo verdeudc (luz a oscuro) */
+    --color-verdeudc-100: #e8f5e9 ;  
+    --color-verdeudc-200: #c8e6c9 ;
+    --color-verdeudc-300: #a5d6a7 ;
+    --color-verdeudc-400: #81c784 ;
+    --color-verdeudc-500: #4A8C3D ;  /* Color base */
+    --color-verdeudc-600: #2e7d32 ;
+    --color-verdeudc-700: #1b5e20 ;
+  }
+  
+  /* Mixins como funciones de layer */
+@layer utilities {
+    @variants responsive {
+      .telefono {
+        @media (min-width: 480px) { @apply contents; }
+      }
+      .tablet {
+        @media (min-width: 768px) { @apply contents; }
+      }
+      .desktop {
+        @media (min-width: 1024px) { @apply contents; }
+      }
+    }
+  }
+
+  
