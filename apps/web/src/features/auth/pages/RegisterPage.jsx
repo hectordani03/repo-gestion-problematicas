@@ -33,7 +33,6 @@ const RegisterPage = () => {
             {error}
           </div>
         )}
-
         <AuthForm onSubmit={handleSubmit}>
           <AuthInput
             label="Correo electrónico"

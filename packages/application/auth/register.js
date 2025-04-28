@@ -42,15 +42,19 @@ export function validateEmail(email) {
 export function validatePassword(password) {
   if (!password) return "Contraseña obligatoria.";
   if (password.length < 8) return "Mínimo 8 caracteres.";
-  if (!/[A-Z]/.test(password)) return "Debe incluir al menos una mayúscula.";
-  if (!/[a-z]/.test(password)) return "Debe incluir al menos una minúscula.";
+  if (!/[A-Z]/.test(password))
+    return "Debe incluir al menos una mayúscula.";
+  if (!/[a-z]/.test(password))
+    return "Debe incluir al menos una minúscula.";
   if (!/[0-9!@#$%^&*]/.test(password))
     return "Debe incluir un número o símbolo.";
+  
   return null;
 }
 
 function validatePasswordConfirm(password, confirmPassword) {
   if (password !== confirmPassword) return "Las contraseñas no coinciden.";
+  
   return null;
 }
 
@@ -59,5 +63,6 @@ function validateStudentId(studentId) {
     return "El número de cuenta debe tener 8 dígitos (alumno) o 6 (maestro).";
   if (!/^\d+$/.test(studentId))
     return "El número de cuenta solo debe contener números.";
+
   return null;
 }

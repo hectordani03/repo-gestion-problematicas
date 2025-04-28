@@ -40,6 +40,12 @@ export default function useRegister() {
     e.preventDefault();
     setIsLoading(true);
 
+    if (!form.acceptTerms) {
+      showError("Debes aceptar los términos y condiciones");
+      setIsLoading(false);
+      return;
+    }
+
     if (!form.email.trim()) {
       showError("El correo es obligatorio");
       setIsLoading(false);
