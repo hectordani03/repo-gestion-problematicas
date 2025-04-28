@@ -30,6 +30,12 @@ authRouter.post("/register", csrfProtection, async (req, res) => {
     });
 
     return res
+      .cookie("refreshToken", response.tokens.refreshToken, {
+        httpOnly: true,
+        secure: true,
+        sameSite: "Strict",
+        maxAge: REFRESH_TOKEN_EXPIRES,
+      })
       .status(201)
       .json({
         success: true,
@@ -37,12 +43,6 @@ authRouter.post("/register", csrfProtection, async (req, res) => {
           user: response.user,
           accessToken: response.tokens.accessToken,
         },
-      })
-      .cookie("refreshToken", response.tokens.refreshToken, {
-        httpOnly: true,
-        secure: true,
-        sameSite: "Strict",
-        maxAge: REFRESH_TOKEN_EXPIRES,
       });
   } catch (err) {
     const code = err instanceof ValidationError ? 422 : 400;
@@ -60,6 +60,12 @@ authRouter.post("/login", csrfProtection, async (req, res) => {
     });
 
     return res
+      .cookie("refreshToken", response.tokens.refreshToken, {
+        httpOnly: true,
+        secure: true,
+        sameSite: "Strict",
+        maxAge: REFRESH_TOKEN_EXPIRES,
+      })
       .status(201)
       .json({
         success: true,
@@ -67,12 +73,6 @@ authRouter.post("/login", csrfProtection, async (req, res) => {
           user: response.user,
           accessToken: response.tokens.accessToken,
         },
-      })
-      .cookie("refreshToken", response.tokens.refreshToken, {
-        httpOnly: true,
-        secure: true,
-        sameSite: "Strict",
-        maxAge: REFRESH_TOKEN_EXPIRES,
       });
   } catch (err) {
     if (err instanceof Warning) {
@@ -94,12 +94,16 @@ authRouter.post("/login", csrfProtection, async (req, res) => {
 });
 
 authRouter.post("/logout", (req, res) => {
-  res
-    .clearCookie("refreshToken", {
-      httpOnly: true,
-      secure: true,
-      sameSite: "Strict",
-    })
-    .status(200)
-    .json({ success: true, message: "Logged out successfully" });
+  try {
+    return res
+      .clearCookie("refreshToken", {
+        httpOnly: true,
+        secure: true,
+        sameSite: "Strict",
+      })
+      .status(200)
+      .json({ success: true, message: "Logged out successfully" });
+  } catch (err) {
+    return res.status(400).json({ success: false, err: err.message });
+  }
 });

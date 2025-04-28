@@ -6,6 +6,7 @@ import SubmitBtn from '../components/SubmitBtn';
 import AltLink from '../components/AltLink';
 import AuthImage from '../components/AuthImage';
 import useLogin from '../hooks/useLogin';
+import useLogout from "../hooks/useLogout";
 import Checkbox from '../components/Checkbox';
 import loginImage from '@/assets/login-image.png';
 import reucAppImage from '@/assets/reuc-app.png';
@@ -14,6 +15,7 @@ import googlePlayImage from '@/assets/play-store.png';
 
 const LoginPage = () => {
   const { form, error, handleChange, handleSubmit } = useLogin();
+  const { logoutError } = useLogout();
 
   return (
     <section className='flex items-center justify-between h-full w-full ml-20'>
@@ -26,6 +28,12 @@ const LoginPage = () => {
           {error && (
             <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4">
               {error}
+            </div>
+          )}
+
+          {logoutError && (
+            <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4">
+              {logoutError}
             </div>
           )}
           <AuthForm onSubmit={handleSubmit}>

@@ -59,3 +59,19 @@ export async function login(data) {
 
   return { success: true, data: bodyRes.data.user };
 }
+
+export async function logout() {
+  const res = await fetch(`${API_URL}/auth/logout`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    credentials: "include",
+  });
+
+  const bodyRes = await res.json();
+
+  if (!res.ok) return { success: false, err: bodyRes.err };
+
+  return { success: true, message: bodyRes.message };
+}
