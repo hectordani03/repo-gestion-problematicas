@@ -6,10 +6,12 @@ import Checkbox from "../components/Checkbox";
 import SubmitBtn from "../components/SubmitBtn";
 import AltLink from "../components/AltLink";
 import useRegister from "../hooks/useRegister";
+import useLogout from "../hooks/useLogout";
 import registerImage from "@/assets/register-image.png";
 
 const RegisterPage = () => {
   const { form, handleChange, handleSubmit, isLoading } = useRegister();
+  const { error } = useLogout();
   const showStudentField = form.email.includes("@ucol.mx");
 
   return (
@@ -26,6 +28,11 @@ const RegisterPage = () => {
           </p>
         </div>
 
+        {error && (
+          <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4">
+            {error}
+          </div>
+        )}
         <AuthForm onSubmit={handleSubmit}>
           <AuthInput
             label="Correo electrónico"

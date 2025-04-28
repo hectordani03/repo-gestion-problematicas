@@ -4,11 +4,21 @@ import Hero from '../components/Hero';
 import GoogleBtn from '../components/GoogleBtn';
 import RegisterBtn from '../components/RegisterBtn';
 import LoginPrompt from '../components/LoginPrompt';
+import useLogout from '../../auth/hooks/useLogout';
 
-const LandingPage = () => (
+const LandingPage = () => {
+  const { error } = useLogout();
+  
+  return (
     <main className="flex items-center justify-between h-full w-full ml-20">
       <section className='flex flex-col justify-center space-y-6 p-6 w-6/12 h-full'>
         <Hero />
+
+        {error && (
+          <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4">
+            {error}
+          </div>
+        )}
         <div className='flex flex-col items-start w-11/12 gap-5'>
           <GoogleBtn />
           {/* <p className='text-gray-800 font-semibold text-sm'>--------------- O ---------------------</p> */}
@@ -26,7 +36,6 @@ const LandingPage = () => (
         <img className='rounded-3xl' src={landingImage} alt="" />
       </div>
     </main>
-
-);
-
+  );
+}
 export default LandingPage;

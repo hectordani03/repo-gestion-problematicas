@@ -23,14 +23,55 @@ export async function register(data) {
     body: JSON.stringify(data),
   });
 
+  const bodyRes = await res.json();
+
   if (!res.ok) {
-    const errorRes = await res.json();
     const msg =
-      res.status !== "422" ? errorRes.err : "Hubo un problema en el registro";
+      res.status !== "422" ? bodyRes.err : "Hubo un problema en el registro";
 
     return { success: false, err: msg };
   }
 
-  const dataRes = await res.json();
-  return { success: true, data: dataRes };
+  return { success: true, data: bodyRes.data.user };
+}
+
+export async function login(data) {
+  const csrfToken = await getCSRFToken();
+
+  const res = await fetch(`${API_URL}/auth/login`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "X-CSRF-Token": csrfToken,
+    },
+    credentials: "include",
+    body: JSON.stringify(data),
+  });
+
+  const bodyRes = await res.json();
+
+  if (!res.ok) {
+    const msg =
+      res.status !== "422" ? bodyRes.err : "Hubo un problema en el login";
+
+    return { success: false, err: msg };
+  }
+
+  return { success: true, data: bodyRes.data.user };
+}
+
+export async function logout() {
+  const res = await fetch(`${API_URL}/auth/logout`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    credentials: "include",
+  });
+
+  const bodyRes = await res.json();
+
+  if (!res.ok) return { success: false, err: bodyRes.err };
+
+  return { success: true, message: bodyRes.message };
 }

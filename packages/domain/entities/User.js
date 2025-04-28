@@ -8,9 +8,10 @@ export class User {
     middleName = undefined,
     lastName = undefined,
     status = undefined,
+    lastLoginIp = undefined,
     lastLoginAt = undefined,
   }) {
-    this.email = email;
+    this.email = email.toLowerCase();
     this.password = password;
     this.studentId = studentId;
 
@@ -22,10 +23,32 @@ export class User {
     this.middleName = middleName;
     this.lastName = lastName;
     this.status = status;
+    this.lastLoginIp = lastLoginIp;
     this.lastLoginAt = lastLoginAt;
   }
 
+  static allowedFields = [
+    "uuid_user",
+    "email",
+    "password",
+    "firstName",
+    "middleName",
+    "lastName",
+    "status",
+    "lastLoginIp",
+    "lastLoginAt",
+  ];
+
   toPrimitives() {
+    const userPrimitive = {};
+
+    for (const key of User.allowedFields) {
+      if (this[key] !== undefined) {
+        userPrimitive[key] = this[key];
+      }
+    }
+
+    return userPrimitive;
     return Object.fromEntries(
       Object.entries(this).filter(([_, v]) => v !== undefined)
     );

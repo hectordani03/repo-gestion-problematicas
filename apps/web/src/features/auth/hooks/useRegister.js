@@ -68,6 +68,12 @@ export default function useRegister() {
       return;
     }
 
+    if (!form.acceptTerms) {
+      showError("Debes aceptar los términos y condiciones");
+      setIsLoading(false);
+      return;
+    }
+
     try {
       const response = await register(form);
       if (!response.success) {
