@@ -18,12 +18,26 @@ const useLogin = () => {
     e.preventDefault();
     setError(null);
 
-    const response = await login(form);
+    if (!form.email.trim()) {
+      setError("El correo es obligatorio");
+      return;
+    }
+    if (!form.password) {
+      setError("La contraseña es obligatoria");
+      return;
+    }
 
-    if (!response.success) {
-      setError(response.err);
-    } else {
+    try {
+      const response = await login(form);
+      if (!response.success) {
+        setError(response.err || "Error al iniciar sesion");
+        return;
+      }
       navigate("/dashboard");
+    } catch (err) {
+      setError(err.message || "Algo salió mal");
+    } finally {
+      // setIsLoading(false);
     }
   };
 

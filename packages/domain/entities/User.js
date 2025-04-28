@@ -13,7 +13,6 @@ export class User {
   }) {
     this.email = email.toLowerCase();
     this.password = password;
-    this.studentId = studentId;
 
     if (status != undefined && typeof status != "number")
       throw new Error("Status must be a number");
@@ -27,7 +26,28 @@ export class User {
     this.lastLoginAt = lastLoginAt;
   }
 
+  static allowedFields = [
+    "uuid_user",
+    "email",
+    "password",
+    "firstName",
+    "middleName",
+    "lastName",
+    "status",
+    "lastLoginIp",
+    "lastLoginAt",
+  ];
+
   toPrimitives() {
+    const userPrimitive = {};
+
+    for (const key of User.allowedFields) {
+      if (this[key] !== undefined) {
+        userPrimitive[key] = this[key];
+      }
+    }
+
+    return userPrimitive;
     return Object.fromEntries(
       Object.entries(this).filter(([_, v]) => v !== undefined)
     );

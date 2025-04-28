@@ -23,17 +23,31 @@ authRouter.post("/refresh", (req, res) => {
 
 authRouter.post("/register", csrfProtection, async (req, res) => {
   try {
-    const response = await register(req.body);
-
-    return res.status(201).json({ success: true, data: response });
-  } catch (err) {
-    if (err instanceof ValidationError)
-      return res.status(422).json({ success: false, err: err.message });
-
-    return res.status(400).json({
-      success: false,
-      err: `Error desconocido: ${err.message}`,
+    const response = await register({
+      body: req.body,
+      ip: req.ip,
+      userAgent: req.headers["user-agent"],
     });
+
+    return res
+      .status(201)
+      .json({
+        success: true,
+        data: {
+          user: response.user,
+          accessToken: response.tokens.accessToken,
+        },
+      })
+      .cookie("refreshToken", response.tokens.refreshToken, {
+        httpOnly: true,
+        secure: true,
+        sameSite: "Strict",
+        maxAge: REFRESH_TOKEN_EXPIRES,
+      });
+  } catch (err) {
+    const code = err instanceof ValidationError ? 422 : 400;
+
+    return res.status(code).json({ success: false, err: err.message });
   }
 });
 
@@ -61,14 +75,31 @@ authRouter.post("/login", csrfProtection, async (req, res) => {
         maxAge: REFRESH_TOKEN_EXPIRES,
       });
   } catch (err) {
-    if (err instanceof Warning)
-      return res.status(500).json({ success: true, err: err.message });
-    if (err instanceof ValidationError)
-      return res.status(422).json({ success: false, err: err.message });
+    if (err instanceof Warning) {
+      code = 500;
+      success = true;
+    } else if (err instanceof ValidationError) {
+      code = 422;
+      success = false;
+    } else {
+      code = 400;
+      success = false;
+    }
 
-    return res.status(400).json({
-      success: false,
-      err: `Error desconocido: ${err.message} ${err.stack}`,
+    return res.status(code).json({
+      success,
+      err: err.message,
     });
   }
+});
+
+authRouter.post("/logout", (req, res) => {
+  res
+    .clearCookie("refreshToken", {
+      httpOnly: true,
+      secure: true,
+      sameSite: "Strict",
+    })
+    .status(200)
+    .json({ success: true, message: "Logged out successfully" });
 });

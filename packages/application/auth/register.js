@@ -1,30 +1,32 @@
 import { ValidationError } from "../entities/ValidationError.js";
 import { registerUser } from "@reuc/domain/registerUser.js";
 
-export async function register(data) {
+export async function register({ body, ip, userAgent }) {
   try {
-    const emailError = validateEmail(data.email);
+    const emailError = validateEmail(body.email);
     if (emailError) throw new ValidationError(emailError);
 
-    const passwordError = validatePassword(data.password);
+    const passwordError = validatePassword(body.password);
     if (passwordError) throw new ValidationError(passwordError);
 
     const passConfirmError = validatePasswordConfirm(
-      data.password,
-      data.confirmPassword
+      body.password,
+      body.confirmPassword
     );
     if (passConfirmError) throw new ValidationError(passConfirmError);
 
-    if (data.email.endsWith("@ucol.mx")) {
-      const studentIdError = validateStudentId(data.studentId);
+    if (body.email.endsWith("@ucol.mx")) {
+      const studentIdError = validateStudentId(body.studentId);
       if (studentIdError) throw new ValidationError(studentIdError);
     }
 
-    const user = await registerUser(data);
+    const resObj = await registerUser({ body: body, ip, userAgent });
 
-    const { password, ...safeUser } = user;
+    const { password, ...safeUser } = resObj.user;
+    const accessToken = resObj.accessToken;
+    const refreshToken = resObj.refreshToken;
 
-    return { user: safeUser };
+    return { user: safeUser, tokens: { accessToken, refreshToken } };
   } catch (error) {
     throw error;
   }

@@ -32,12 +32,11 @@ export async function register(data) {
     return { success: false, err: msg };
   }
 
-  return { success: true, data: bodyRes };
+  return { success: true, data: bodyRes.data.user };
 }
 
 export async function login(data) {
   const csrfToken = await getCSRFToken();
-  console.log("login to api");
 
   const res = await fetch(`${API_URL}/auth/login`, {
     method: "POST",
@@ -48,7 +47,6 @@ export async function login(data) {
     credentials: "include",
     body: JSON.stringify(data),
   });
-  console.log("process login response from api");
 
   const bodyRes = await res.json();
 
@@ -58,7 +56,6 @@ export async function login(data) {
 
     return { success: false, err: msg };
   }
-  console.log(bodyRes);
 
   return { success: true, data: bodyRes.data.user };
 }

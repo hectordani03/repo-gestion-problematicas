@@ -17,7 +17,7 @@ export async function login({ data, ip, userAgent }) {
     if (!resObj.updated)
       throw new Warning("No se ha podido actualizar ultimo login del usuario");
 
-    const { password, ...safeUser } = resObj.data;
+    const { password, ...safeUser } = resObj.user;
     const accessToken = resObj.accessToken;
     const refreshToken = resObj.refreshToken;
 
