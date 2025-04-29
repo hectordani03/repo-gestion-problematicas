@@ -1,4 +1,3 @@
-// src/routes/AppRouter.jsx
 import { Routes, Route } from 'react-router-dom'
 import LandingPage from '@/features/landing/pages/LandingPage'
 import RegisterPage from '@/features/auth/pages/RegisterPage'
@@ -11,8 +10,9 @@ import PlainLayout from '@/layouts/PlainLayout'
 import AuthLayout from '@/layouts/AuthLayout'
 import DashboardLayout from '@/layouts/DashboardLayout'
 import ProfilePage from '@/features/profile/pages/ProfilePage'
-import RequestProject from '@/features/projects/RequestProject'
-import ExploreProjects from '@/features/projects/ExploreProjects'
+import RequestProject from '@/features/projects/pages/RequestProject'
+import ExploreProjects from '@/features/projects/pages/ExploreProjects'
+import ProjectDetails from '@/features/projects/pages/ProjectDetails'
 
 const AppRouter = () => {
   return (
@@ -33,8 +33,12 @@ const AppRouter = () => {
         <Route path="/dashboard" element={<DashboardMain />} />
         {/* Aquí puedes anidar más rutas como /dashboard/proyectos */}
         <Route path="/profile" element={<ProfilePage />} />
-        <Route path="/requestProject" element={<RequestProject />} />
-        <Route path="/exploreProjects" element={<ExploreProjects />} />
+        <Route path="/request-project" element={<RequestProject />} />
+        <Route path="/explore-projects" element={<ExploreProjects />} />
+        <Route path="/explore-projects/project-details" element={<ProjectDetails />} />
+        {/* HAY QUE MANEJARLA LAS URL CON SLUGS: */}
+        {/* <Link to={`/explore-projects/${project.slug}`}>Ver detalles</Link> */}
+        {/* <Route path="/explore-projects/:slug" element={ProjectDetails} /> */}
       </Route>
 
       {/* 404 */}

@@ -3,9 +3,12 @@ import ProjectList from '../components/ProjectList'
 import RecentProjects from '../components/RecentProjects'
 import RecentActivity from '../components/RecentActivity'
 import ProjectSummary from '../components/ProjectSummary'
+import Timeline from '@/features/dashboard/components/Timeline'
+
 
 const DashboardMain = () => {
   return (
+    <>
     <div className="p-4 grid gap-4 xl:grid-cols-3 w-9/12">
       <div className="col-span-3 items-start">
         <ProjectStats />
@@ -21,6 +24,8 @@ const DashboardMain = () => {
         </div>
       </div>
     </div>
+    <Timeline />
+    </>
   )
 }
 

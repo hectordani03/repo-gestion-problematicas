@@ -10,7 +10,6 @@ const DashboardLayout = () => {
         <Sidebar />
         <div className="flex flex-1">
           <Outlet />
-          <Timeline />
         </div>
       </main>
     </>
