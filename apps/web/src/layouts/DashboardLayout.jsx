@@ -1,6 +1,6 @@
 import { Outlet } from 'react-router-dom'
 import Sidebar from '@/components/Sidebar'
-import Header from '@/components/Header'
+import Header from '@/components/Header/Header'
 import Timeline from '@/features/dashboard/components/Timeline'
 const DashboardLayout = () => {
   return (

@@ -11,6 +11,8 @@ import PlainLayout from '@/layouts/PlainLayout'
 import AuthLayout from '@/layouts/AuthLayout'
 import DashboardLayout from '@/layouts/DashboardLayout'
 import ProfilePage from '@/features/profile/pages/ProfilePage'
+import RequestProject from '@/features/projects/RequestProject'
+import ExploreProjects from '@/features/projects/ExploreProjects'
 
 const AppRouter = () => {
   return (
@@ -31,6 +33,8 @@ const AppRouter = () => {
         <Route path="/dashboard" element={<DashboardMain />} />
         {/* Aquí puedes anidar más rutas como /dashboard/proyectos */}
         <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/requestProject" element={<RequestProject />} />
+        <Route path="/exploreProjects" element={<ExploreProjects />} />
       </Route>
 
       {/* 404 */}
