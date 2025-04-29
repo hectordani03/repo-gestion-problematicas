@@ -1,13 +1,34 @@
-import React from 'react';
+// LandingPage.jsx
+import React, { useEffect } from 'react';
 import landingImage from '@/assets/landing-image.jpg';
 import Hero from '../components/Hero';
 import GoogleBtn from '../components/GoogleBtn';
 import RegisterBtn from '../components/RegisterBtn';
 import LoginPrompt from '../components/LoginPrompt';
 import useLogout from '../../auth/hooks/useLogout';
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
+
+const MySwal = withReactContent(Swal);
 
 const LandingPage = () => {
   const { error } = useLogout();
+  
+  useEffect(() => {
+    // Mostrar alerta si viene de logout
+    if (sessionStorage.getItem('showLogoutAlert')) {
+      MySwal.fire({
+        toast: true,
+        position: "bottom-end",
+        icon: "info",
+        title: "Sesión cerrada",
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+      });
+      sessionStorage.removeItem('showLogoutAlert');
+    }
+  }, []);
   
   return (
     <main className="flex items-center justify-between h-full w-full ml-20">

@@ -14,7 +14,7 @@ import appStoreImage from '@/assets/app-store.png';
 import googlePlayImage from '@/assets/play-store.png';
 
 const LoginPage = () => {
-  const { form, error, handleChange, handleSubmit } = useLogin();
+  const { form, error, isLoading, handleChange, handleSubmit } = useLogin();
   const { logoutError } = useLogout();
 
   return (
@@ -40,7 +40,7 @@ const LoginPage = () => {
             <AuthInput label="Correo electrónico" name="email" value={form.email} onChange={handleChange} />
             <AuthInput label="Contraseña" name="password" type="password" value={form.password} onChange={handleChange} />
             <AltLink href="/register" text='No tienes una cuenta?' link='Registrate' />
-            <SubmitBtn text='Iniciar sesion' link='/dashboard' />
+            <SubmitBtn text='Iniciar sesion' isLoading={isLoading} />
             <hr className='text-lime-600 my-3' />
           </AuthForm>
           <div className='flex items-center gap-5'>
