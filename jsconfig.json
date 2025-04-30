@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@reuc/web/*": ["apps/web/*"],
+      "@reuc/presentation/*": ["apps/api/*"],
+      "@reuc/application/*": ["packages/application/*"],
+      "@reuc/domain/*": ["packages/domain/*"],
+      "@reuc/infrastructure/*": ["packages/infrastructure/*"]
+    },
+    "module": "ESNext",
+    "moduleResolution": "node"
+  },
+  "include": ["apps", "packages"]
+}

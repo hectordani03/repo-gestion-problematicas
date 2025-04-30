@@ -1,13 +1,30 @@
 {
+  "private": true,
   "name": "ReUC",
   "version": "1.0.0",
-  "description": "",
+  "type": "module",
   "main": "index.js",
   "scripts": {
+    "dev:api": "pnpm --filter @reuc/presentation dev",
+    "dev:web": "pnpm --filter @reuc/web dev",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "packageManager": "pnpm@10.7.1"
+  "packageManager": "pnpm@10.7.1",
+  "workspaces": [
+    "apps/*",
+    "libs/*",
+    "packages/*"
+  ],
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "bcrypt"
+    ]
+  },
+  "dependencies": {
+    "sweetalert2": "^11.19.1",
+    "sweetalert2-react-content": "^5.1.0"
+  }
 }
