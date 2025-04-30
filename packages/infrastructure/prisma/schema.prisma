@@ -6,8 +6,8 @@
 
 // Agregue binaryTargets = ["native", "rhel-openssl-3.0.x"] porque el que tienes no es compatible para mi sistema
 generator client {
-  provider = "prisma-client-js"
-  output   = "../generated/prisma"
+  provider      = "prisma-client-js"
+  output        = "../generated/prisma"
   binaryTargets = ["native", "rhel-openssl-3.0.x"]
 }
 
@@ -21,6 +21,7 @@ datasource db {
   // url      = env("DATABASE_URL")
 }
 
+// ================== USERS RELATED MODELS ==================
 model User {
   uuid_user   String       @id @default(uuid())
   email       String       @unique
@@ -35,10 +36,11 @@ model User {
   createdAt   DateTime     @default(now()) @map("created_at")
   updatedAt   DateTime     @updatedAt @map("updated_at")
 
-  admins     Admin[]
-  students   Student[]
-  professors Professor[]
-  outsiders  Outsider[]
+  admins      Admin[]
+  students    Student[]
+  professors  Professor[]
+  outsiders   Outsider[]
+  Application Application[]
 
   @@index([email])
   @@map("Users")
@@ -130,4 +132,79 @@ model Outsider {
 
   @@index([uuidUser])
   @@map("Outsiders")
+}
+
+// ================== USERS RELATED MODELS ==================
+model Application {
+  // ===TEMP
+  outsiderName        String   @map("outsider_name")
+  phone               String?
+  email               String?
+  // ===END TEMP
+  uuid_application    String   @id @default(uuid())
+  // TODO: the uuid_user will be used temporaly.
+  // This will be removed to use outsiders instead
+  uuidUser            String   @map("uuid_user")
+  user                User     @relation(fields: [uuidUser], references: [uuid_user])
+  name                String
+  // facultades
+  topicInterest       String   @map("topic_interest")
+  // TEMP FIELD FOR DEADLINE
+  projectType         String   @map("project_type")
+  // type                Int          @map("project_type_id")
+  // projectType         Project_Type @relation(fields: [type], references: [project_type_id])
+  estimatedTime       DateTime @map("estimated_time")
+  description         String?
+  extendedDescription String?  @map("extended_description")
+  visibility          String?
+  createdAt           DateTime @default(now()) @map("created_at")
+  updatedAt           DateTime @updatedAt @map("updated_at")
+
+  Project                     Project[]
+  Project_Type                Project_Type? @relation(fields: [project_TypeProject_type_id], references: [project_type_id])
+  project_TypeProject_type_id Int?
+
+  @@index([uuidUser])
+  @@index([topicInterest])
+  @@index([createdAt]) // filtering or sorting by date
+  @@map("Applications")
+}
+
+model Project {
+  // TODO: checkout reflux usage and solve how to save and use
+  // for a cleaner looks in the uri instead of uuid
+  uuid_project    String       @id @default(uuid())
+  uuidApplication String       @map("uuid_application")
+  application     Application  @relation(fields: [uuidApplication], references: [uuid_application])
+  topicInterest   String       @map("topic_interest")
+  type            Int          @map("project_type_id")
+  projectType     Project_Type @relation(fields: [type], references: [project_type_id])
+  estimatedTime   String       @map("estimated_time")
+  // uuid_team
+  status          String
+  createdAt       DateTime     @default(now()) @map("created_at")
+  updatedAt       DateTime     @updatedAt @map("updated_at")
+
+  @@index([uuidApplication])
+  @@index([type])
+  @@index([createdAt]) // filtering or sorting by date
+  @@index([status]) // filtering by status
+  @@map("Projects")
+}
+
+model Project_Type {
+  project_type_id     Int      @id @default(autoincrement())
+  name                String
+  estimatedTime       String   @map("estimated_time")
+  minTeamMembersSize  Int      @map("min_team_members_size")
+  maxTeamMembersSize  Int      @map("max_team_members_size")
+  minTeamAdvisorsSize Int      @map("min_team_advisors_size")
+  maxTeamAdvisorsSize Int      @map("max_team_advisors_size")
+  createdAt           DateTime @default(now()) @map("created_at")
+  updatedAt           DateTime @updatedAt @map("updated_at")
+
+  Application Application[]
+  Project     Project[]
+
+  @@map("Project_Types")
 }

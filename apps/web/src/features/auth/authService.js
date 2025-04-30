@@ -32,7 +32,10 @@ export async function register(data) {
     return { success: false, err: msg };
   }
 
-  return { success: true, data: bodyRes.data.user };
+  const { accessToken, user } = bodyRes.data;
+  sessionStorage.setItem("accessToken", accessToken);
+
+  return { success: true, data: user };
 }
 
 export async function login(data) {
@@ -57,7 +60,10 @@ export async function login(data) {
     return { success: false, err: msg };
   }
 
-  return { success: true, data: bodyRes.data.user };
+  const { accessToken, user } = bodyRes.data;
+  sessionStorage.setItem("accessToken", accessToken);
+
+  return { success: true, data: user };
 }
 
 export async function logout() {

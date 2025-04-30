@@ -6,7 +6,7 @@
   "main": "index.js",
   "scripts": {
     "dev:api": "pnpm --filter @reuc/presentation dev",
-    "dev:web": "pnpm --filter web dev",
+    "dev:web": "pnpm --filter @reuc/web dev",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

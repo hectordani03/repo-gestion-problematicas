@@ -5,6 +5,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 
 import { authRouter } from "./routes/auth.js";
+import { projectRouter } from "./routes/project.js";
 
 dotenv.config();
 
@@ -35,6 +36,9 @@ app.use((req, res, next) => {
 // Rutas Auth
 app.use("/auth", authRouter);
 
+// Rutas Project
+app.use("/project", projectRouter);
+
 // Rutas base
 app.get("/", (req, res) => {
   res.send("Hello Word!!!");
@@ -47,20 +51,3 @@ app.get("/csrf-token", csrfProtection, (req, res) => {
 app.listen(PORT, () => {
   console.log(`Servidor corriendo en http://localhost:${PORT}`);
 });
-
-// // make another route file "routes/user.js"
-// import express from "express";
-// import { authMiddleware } from "../middleware/auth.js";
-
-// const userRouter = express.Router();
-
-// userRouter.get("/profile", authMiddleware, async (req, res) => {
-//   // You now have access to req.user (uuid_user, ip, ua, etc.)
-//   res.json({ success: true, user: req.user });
-// });
-
-// // call the router file and use as
-// export default userRouter;
-
-// import userRouter from "./routes/user.js";
-// app.use("/user", userRouter);

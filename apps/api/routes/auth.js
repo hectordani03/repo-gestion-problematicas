@@ -75,6 +75,9 @@ authRouter.post("/login", csrfProtection, async (req, res) => {
         },
       });
   } catch (err) {
+    let code;
+    let success;
+
     if (err instanceof Warning) {
       code = 500;
       success = true;
