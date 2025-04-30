@@ -3,7 +3,7 @@ import RequestProjectForm from '../components/RequestProjectForm';
 import useRequestProject from '../hooks/useRequestProject';
 
 const RequestProject = () => {
-  const { form, handleChange, handleSubmit } = useRequestProject();
+  const { form, error, handleChange, handleSubmit } = useRequestProject();
   const [showHelp, setShowHelp] = useState(false);
 
   return (
@@ -27,6 +27,12 @@ const RequestProject = () => {
           <p className="mb-2 font-semibold">Recomendaciones para llenar el formulario:</p>
           <ul className="list-disc pl-5 space-y-1">
           </ul>
+        </div>
+      )}
+      
+      {error && (
+        <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4">
+          {error}
         </div>
       )}
 
