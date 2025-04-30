@@ -11,8 +11,6 @@ const {
 } = process.env;
 
 export function generateAccessToken(payload) {
-  console.log("generateAccessToken", payload);
-
   return jwt.sign(payload, JWT_SECRET, {
     algorithm: "HS256",
     expiresIn: ACCESS_TOKEN_EXPIRES,
@@ -20,7 +18,6 @@ export function generateAccessToken(payload) {
 }
 
 export function generateRefreshToken(payload) {
-  console.log("generateRefreshToken", payload);
   return jwt.sign(payload, JWT_REFRESH_SECRET, {
     algorithm: "HS256",
     expiresIn: REFRESH_TOKEN_EXPIRES,
@@ -28,11 +25,9 @@ export function generateRefreshToken(payload) {
 }
 
 export function verifyAccessToken(token) {
-  console.log("verifyAccessToken", token);
   return jwt.verify(token, JWT_SECRET);
 }
 
 export function verifyRefreshToken(token) {
-  console.log("verifyRefreshToken", token);
   return jwt.verify(token, JWT_REFRESH_SECRET);
 }

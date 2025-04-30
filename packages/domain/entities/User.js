@@ -13,7 +13,6 @@ export class User {
   }) {
     this.email = email.toLowerCase();
     this.password = password;
-    this.studentId = studentId;
 
     if (status != undefined && typeof status != "number")
       throw new Error("Status must be a number");
@@ -49,8 +48,5 @@ export class User {
     }
 
     return userPrimitive;
-    return Object.fromEntries(
-      Object.entries(this).filter(([_, v]) => v !== undefined)
-    );
   }
 }

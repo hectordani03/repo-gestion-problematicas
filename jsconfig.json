@@ -3,6 +3,7 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
+      "@reuc/web/*": ["apps/web/*"],
       "@reuc/presentation/*": ["apps/api/*"],
       "@reuc/application/*": ["packages/application/*"],
       "@reuc/domain/*": ["packages/domain/*"],

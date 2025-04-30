@@ -30,6 +30,9 @@ const AppRouter = () => {
 
       {/* Rutas Dashboard (protegidas) */}
       <Route element={<DashboardLayout />}>
+        {/* TODO: Hay que hacer un request a la API para verificar
+            que en verdad el usuario este logeado (auyn no hay ruta
+            para eso en la API) */}
         <Route path="/dashboard" element={<DashboardMain />} />
         {/* Aquí puedes anidar más rutas como /dashboard/proyectos */}
         <Route path="/profile" element={<ProfilePage />} />
