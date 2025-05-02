@@ -1,5 +1,5 @@
-import { ValidationError } from "../entities/ValidationError.js";
-import { registerUser } from "@reuc/domain/registerUser.js";
+import { ValidationError } from "../errors/ValidationError.js";
+import { registerUser } from "@reuc/domain/user/registerUser.js";
 
 export async function register({ body, ip, userAgent }) {
   try {

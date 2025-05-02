@@ -1,5 +1,5 @@
-import { comparePasswords } from "./auth/hashPassword.js";
-import { generateAccessToken, generateRefreshToken } from "./auth/jwt.js";
+import { comparePasswords } from "../libs/hashPassword.js";
+import { generateAccessToken, generateRefreshToken } from "../libs/jwt.js";
 import { userRepo } from "@reuc/infrastructure/userRepo.js";
 
 export async function loginUser({ email, password, ip, userAgent }) {
