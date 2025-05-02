@@ -3,7 +3,7 @@ import {
   verifyRefreshToken,
   generateAccessToken,
   verifyAccessToken,
-} from "@reuc/domain/libs/jwt.js";
+} from "@reuc/domain/libs/auth/jwt.js";
 
 export function sessionAuth(token, ip, ua) {
   try {

@@ -1,6 +1,6 @@
-import { hashPassword } from "../libs/hashPassword.js";
+import { hashPassword } from "../libs/auth/hashPassword.js";
 import { User } from "./User.js";
-import { generateAccessToken, generateRefreshToken } from "../libs/jwt.js";
+import { generateAccessToken, generateRefreshToken } from "../libs/auth/jwt.js";
 import { userRepo } from "@reuc/infrastructure/userRepo.js";
 
 export async function registerUser({ body, ip, userAgent }) {
