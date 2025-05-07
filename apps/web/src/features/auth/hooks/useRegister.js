@@ -12,7 +12,7 @@ export default function useRegister() {
     password: "",
     confirmPassword: "",
     acceptTerms: false,
-    studentId: "",
+    universityId: "",
   });
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
@@ -62,7 +62,7 @@ export default function useRegister() {
       return;
     }
 
-    if (form.email.includes("@ucol.mx") && !form.studentId.trim()) {
+    if (form.email.includes("@ucol.mx") && !form.universityId.trim()) {
       showError("Ingresa tu número de cuenta");
       setIsLoading(false);
       return;
