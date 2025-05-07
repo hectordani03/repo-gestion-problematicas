@@ -1,12 +1,12 @@
-import { sessionAuth } from "@reuc/application/auth/session.js";
-import { ValidationError } from "@reuc/application/entities/ValidationError.js";
+import session from "@reuc/application/auth/index.js";
+import { ValidationError } from "@reuc/application/errors/ValidationError.js";
 
 export function authMiddleware(req, res, next) {
   const token = req.headers.authorization?.split(" ")[1];
   if (!token) return res.status(401).json({ error: "Token missing" });
 
   try {
-    const decoded = sessionAuth(token, req.ip, req.headers["user-agent"]);
+    const decoded = session.auth(token, req.ip, req.headers["user-agent"]);
 
     req.user = decoded;
 
