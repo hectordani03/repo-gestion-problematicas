@@ -19,7 +19,6 @@
     "expo-constants": "~17.1.6",
     "expo-linear-gradient": "~14.1.4",
     "expo-status-bar": "~2.2.3",
-    "nativewind": "^4.1.23",
     "react": "19.0.0",
     "react-native": "0.79.2",
     "react-native-gesture-handler": "^2.24.0",
