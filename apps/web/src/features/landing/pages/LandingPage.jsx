@@ -15,7 +15,14 @@ const LandingPage = () => {
   const { error } = useLogout();
   
   useEffect(() => {
-    // Mostrar alerta si viene de logout
+    const isLoggedIn = localStorage.getItem('token'); 
+  
+    if (isLoggedIn) {
+      localStorage.removeItem('token');
+      sessionStorage.setItem('showLogoutAlert', 'true');
+      
+    }
+  
     if (sessionStorage.getItem('showLogoutAlert')) {
       MySwal.fire({
         toast: true,
@@ -23,12 +30,13 @@ const LandingPage = () => {
         icon: "info",
         title: "Sesión cerrada",
         showConfirmButton: false,
-        timer: 3000,
+        timer: 300,
         timerProgressBar: true,
       });
       sessionStorage.removeItem('showLogoutAlert');
     }
   }, []);
+  
   
   return (
     <main className="flex items-center justify-between h-full w-full ml-20">

@@ -1,7 +1,7 @@
-import { Warning } from "../entities/Warning.js";
-import { ValidationError } from "../entities/ValidationError.js";
-import { validateEmail } from "./register.js";
-import { loginUser } from "@reuc/domain/loginUser.js";
+import { Warning } from "../errors/Warning.js";
+import { ValidationError } from "../errors/ValidationError.js";
+import { validateEmail } from "./validators.js";
+import { loginUser } from "@reuc/domain/user/loginUser.js";
 
 export async function login({ data, ip, userAgent }) {
   try {

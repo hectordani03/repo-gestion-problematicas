@@ -21,3 +21,12 @@ export function validateDate(dateString) {
 
   return null;
 }
+
+export function validateStudentId(studentId) {
+  if (studentId.length !== 8 && studentId.length !== 6)
+    return "El número de cuenta debe tener 8 dígitos (alumno) o 6 (maestro).";
+  if (!/^\d+$/.test(studentId))
+    return "El número de cuenta solo debe contener números.";
+
+  return null;
+}
