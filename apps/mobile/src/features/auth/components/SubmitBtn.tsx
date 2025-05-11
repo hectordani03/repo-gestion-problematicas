@@ -4,10 +4,10 @@ import React from 'react'
 import {
   TouchableOpacity,
   Text,
-  StyleSheet,
   ViewStyle,
   TextStyle,
 } from 'react-native'
+import { SubmitBtnStyles } from '../../../styles'
 
 type Props = {
   onPress: () => void
@@ -26,34 +26,16 @@ export default function SubmitBtn({
   return (
     <TouchableOpacity
       style={[
-        styles.button,
+        SubmitBtnStyles.button,
         style,
-        disabled && styles.disabledButton,
+        disabled && SubmitBtnStyles.disabledButton,
       ]}
       onPress={onPress}
       disabled={disabled}
     >
-      <Text style={[styles.text, textStyle]}>
+      <Text style={[SubmitBtnStyles.text, textStyle]}>
         {children}
       </Text>
     </TouchableOpacity>
   )
 }
-
-const styles = StyleSheet.create({
-  button: {
-    backgroundColor: '#65A30D',
-    paddingVertical: 14,
-    borderRadius: 12,
-    alignItems: 'center',
-    marginBottom: 10,
-  },
-  disabledButton: {
-    opacity: 0.6,
-  },
-  text: {
-    color: '#fff',
-    fontSize: 16,
-    fontWeight: 'bold',
-  },
-})
