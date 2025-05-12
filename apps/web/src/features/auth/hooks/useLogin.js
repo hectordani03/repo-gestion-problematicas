@@ -2,65 +2,70 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { login } from "../authService.js";
-import Swal from "sweetalert2";
-import withReactContent from "sweetalert2-react-content";
-
-const MySwal = withReactContent(Swal);
+import { Alerts } from "@/shared/alerts";
 
 const useLogin = () => {
   const [form, setForm] = useState({
     email: "",
     password: "",
   });
-  const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
-  const showError = (msg) =>
-    MySwal.fire({
-      toast: true,
-      position: "bottom-end",
-      icon: "error",
-      title: msg,
-      showConfirmButton: false,
-      timer: 3000,
-      timerProgressBar: true,
+  const handleChange = (e) => {
+    setForm({ 
+      ...form, 
+      [e.target.name]: e.target.value 
     });
-
-  const handleChange = (e) =>
-    setForm({ ...form, [e.target.name]: e.target.value });
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError(null);
     setIsLoading(true);
-
-    if (!form.email.trim()) {
-      showError("El correo es obligatorio");
-      setIsLoading(false);
-      return;
-    }
-    if (!form.password) {
-      showError("La contraseña es obligatoria");
-      setIsLoading(false);
-      return;
-    }
-
+    
     try {
-      const response = await login(form);
-      if (!response.success) {
-        setError(response.err || "Error al iniciar sesion");
+      // Validación de campos
+      if (!form.email.trim()) {
+        Alerts.error("El correo es obligatorio");
         return;
       }
+      
+      if (!form.password) {
+        Alerts.error("La contraseña es obligatoria");
+        return;
+      }
+
+      // Mostrar carga
+      const loadingAlert = Alerts.loading("Iniciando sesión...");
+      
+      // Llamada al servicio
+      const response = await login(form);
+      
+      // Cerrar alerta de carga
+      loadingAlert.close();
+
+      if (!response.success) {
+        Alerts.error(response.err || "Error al iniciar sesión");
+        return;
+      }
+
+      // Navegación y feedback
+      Alerts.success("¡Bienvenido!");
       navigate("/dashboard");
+
     } catch (err) {
-      setError(err.message || "Algo salió mal");
+      Alerts.error(err.message || "Error de conexión");
     } finally {
       setIsLoading(false);
     }
   };
 
-  return { form, error, isLoading, handleChange, handleSubmit };
+  return { 
+    form, 
+    isLoading, 
+    handleChange, 
+    handleSubmit 
+  };
 };
 
 export default useLogin;

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { logout } from "../authService.js";
+import { Alerts } from "@/shared/alerts"; // Importación de la librería de alertas
 
 const useLogout = () => {
   const [error, setError] = useState(null);
@@ -9,12 +10,20 @@ const useLogout = () => {
       setError(null);
       try {
         const response = await logout();
+        
         if (!response.success) {
-          setError(response.err || "Error al terminar la sesión");
+          Alerts.error(response.err || "Error al terminar la sesión");
           return;
         }
+
+        // Limpiar almacenamiento local y establecer bandera
+        localStorage.removeItem("accessToken");
+        sessionStorage.setItem("showLogoutAlert", "true");
+        
       } catch (err) {
-        setError(err.message || "Algo salió mal");
+        // Limpiar credenciales incluso con error
+        localStorage.removeItem("accessToken");
+        Alerts.error(err.message || "Algo salió mal al cerrar sesión");
       }
     };
 
