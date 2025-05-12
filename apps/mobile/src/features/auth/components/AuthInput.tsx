@@ -1,28 +1,32 @@
 // apps/mobile/src/features/auth/components/AuthInput.tsx
+
 import React from 'react'
-import { View, Text, TextInput, StyleSheet, TextInputProps } from 'react-native'
+import { View, Text, TextInput, TextInputProps } from 'react-native'
+import { AuthInputStyles } from '../../../styles/components/auth/authComponents.styles'
+import { palette } from '../../../styles/theme/colors'
 
 interface Props extends TextInputProps {
-  label: string
+  label?: string      // opcional: si se pasa, se renderiza arriba
+  placeholder?: string
 }
 
-const AuthInput: React.FC<Props> = ({ label, style, ...props }) => (
-  <View style={styles.container}>
-    <Text style={styles.label}>{label}</Text>
-    <TextInput style={[styles.input, style]} {...props} />
+const AuthInput: React.FC<Props> = ({
+  label,
+  placeholder,
+  style,
+  ...props
+}) => (
+  <View style={AuthInputStyles.container}>
+    {label && (
+      <Text style={AuthInputStyles.label}>{label}</Text>
+    )}
+    <TextInput
+      style={[AuthInputStyles.input, style]}
+      placeholder={placeholder}
+      placeholderTextColor={palette.textSecondary}
+      {...props}
+    />
   </View>
 )
 
 export default AuthInput
-
-const styles = StyleSheet.create({
-  container: { marginBottom: 20 },
-  label: { fontSize: 16, fontWeight: 'bold', color: '#374151', marginBottom: 6 },
-  input: {
-    backgroundColor: '#E5E7EB',
-    borderRadius: 10,
-    paddingHorizontal: 14,
-    paddingVertical: 12,
-    fontSize: 16,
-  },
-})
