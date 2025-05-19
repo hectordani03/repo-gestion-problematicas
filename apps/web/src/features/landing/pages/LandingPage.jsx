@@ -6,10 +6,7 @@ import GoogleBtn from '../components/GoogleBtn';
 import RegisterBtn from '../components/RegisterBtn';
 import LoginPrompt from '../components/LoginPrompt';
 import useLogout from '../../auth/hooks/useLogout';
-import Swal from "sweetalert2";
-import withReactContent from "sweetalert2-react-content";
-
-const MySwal = withReactContent(Swal);
+import { Alerts } from '@/shared/alerts'; // Nueva importación
 
 const LandingPage = () => {
   const { error } = useLogout();
@@ -20,23 +17,13 @@ const LandingPage = () => {
     if (isLoggedIn) {
       localStorage.removeItem('token');
       sessionStorage.setItem('showLogoutAlert', 'true');
-      
     }
   
     if (sessionStorage.getItem('showLogoutAlert')) {
-      MySwal.fire({
-        toast: true,
-        position: "bottom-end",
-        icon: "info",
-        title: "Sesión cerrada",
-        showConfirmButton: false,
-        timer: 300,
-        timerProgressBar: true,
-      });
+      Alerts.info('Sesión cerrada'); 
       sessionStorage.removeItem('showLogoutAlert');
     }
   }, []);
-  
   
   return (
     <main className="flex items-center justify-between h-full w-full ml-20">
@@ -48,23 +35,28 @@ const LandingPage = () => {
             {error}
           </div>
         )}
+        
         <div className='flex flex-col items-start w-11/12 gap-5'>
           <GoogleBtn />
-          {/* <p className='text-gray-800 font-semibold text-sm'>--------------- O ---------------------</p> */}
           <div className="flex items-center gap-4 w-6/12">
             <hr className="flex-grow border-t border-gray-300 border-1"/>
             <span className="text-sm text-gray-500">O</span>
             <hr className="flex-grow border-t border-gray-300 border-1"/>
           </div>
           <RegisterBtn />
-          <p className='w-5/12 text-sm ml-3 mb-5'>Al registrarte, aceptas los Términos de Servicio y Política de Privacidad, Incluida la política de Uso de Cookies.</p>
+          <p className='w-5/12 text-sm ml-3 mb-5'>
+            Al registrarte, aceptas los Términos de Servicio y Política de Privacidad, 
+            Incluida la política de Uso de Cookies.
+          </p>
           <LoginPrompt />
         </div>
       </section>
+      
       <div className='flex items-center justify-center w-6/12'>
         <img className='rounded-3xl' src={landingImage} alt="" />
       </div>
     </main>
   );
 }
+
 export default LandingPage;

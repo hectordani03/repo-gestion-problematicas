@@ -21,3 +21,12 @@ export function validateDate(dateString) {
 
   return null;
 }
+
+export function validateUniversityId(universityId) {
+  if (universityId.length !== 8 && universityId.length !== 4)
+    return "El número de cuenta debe tener 8 dígitos (alumno) o 4 (maestro).";
+  if (!/^\d+$/.test(universityId))
+    return "El número de cuenta solo debe contener números.";
+
+  return null;
+}

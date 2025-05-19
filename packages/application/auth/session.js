@@ -1,9 +1,9 @@
-import { ValidationError } from "../entities/ValidationError.js";
+import { ValidationError } from "../errors/ValidationError.js";
 import {
   verifyRefreshToken,
   generateAccessToken,
   verifyAccessToken,
-} from "@reuc/domain/auth/jwt.js";
+} from "@reuc/domain/libs/auth/jwt.js";
 
 export function sessionAuth(token, ip, ua) {
   try {
