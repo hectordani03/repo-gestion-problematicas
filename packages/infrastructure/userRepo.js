@@ -15,7 +15,7 @@ export const userRepo = {
 
     if (!user) return null;
 
-    let userRole = null;
+    let roleInfo = null;
     if (user.admins.length > 0) {
       roleInfo = { role: "admin", uuid_role: user.admins[0].uuid_admin };
     } else if (user.students.length > 0) {
@@ -34,8 +34,8 @@ export const userRepo = {
 
     return {
       ...user,
-      role: userRole?.role ?? null,
-      uuid_role: userRole?.uuid_role ?? null,
+      role: roleInfo?.role ?? null,
+      uuid_role: roleInfo?.uuid_role ?? null,
     };
   },
   async findByUuid(uuid) {
