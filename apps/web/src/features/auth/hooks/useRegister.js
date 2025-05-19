@@ -17,41 +17,41 @@ export default function useRegister() {
   const validations = [
     {
       condition: !form.acceptTerms,
-      message: "Debes aceptar los términos y condiciones"
+      message: "Debes aceptar los términos y condiciones",
     },
     {
       condition: !form.email.trim(),
-      message: "El correo es obligatorio"
+      message: "El correo es obligatorio",
     },
     {
       condition: !form.password,
-      message: "La contraseña es obligatoria"
+      message: "La contraseña es obligatoria",
     },
     {
       condition: !form.confirmPassword,
-      message: "Confirma tu contraseña"
+      message: "Confirma tu contraseña",
     },
     {
-      condition: form.email.includes("@ucol.mx") && !form.studentId.trim(),
-      message: "Ingresa tu número de cuenta"
-    }
+      condition: form.email.includes("@ucol.mx") && !form.universityId?.trim(),
+      message: "Ingresa tu número de cuenta",
+    },
   ];
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
-    setForm(prev => ({
+    setForm((prev) => ({
       ...prev,
-      [name]: type === "checkbox" ? checked : value
+      [name]: type === "checkbox" ? checked : value,
     }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
-    
+
     try {
       // Validaciones
-      const error = validations.find(v => v.condition);
+      const error = validations.find((v) => v.condition);
       if (error) {
         Alerts.error(error.message);
         return;
@@ -59,7 +59,7 @@ export default function useRegister() {
 
       // Mostrar carga
       const loadingAlert = Alerts.loading("Registrando cuenta...");
-      
+
       // Registrar usuario
       const response = await register(form);
       loadingAlert.close();
@@ -72,7 +72,6 @@ export default function useRegister() {
       // Feedback y navegación
       Alerts.success("¡Registro exitoso!");
       navigate("/dashboard");
-
     } catch (err) {
       Alerts.error(err.message || "Error en el servidor");
     } finally {
@@ -80,10 +79,10 @@ export default function useRegister() {
     }
   };
 
-  return { 
-    form, 
-    handleChange, 
-    handleSubmit, 
-    isLoading 
+  return {
+    form,
+    handleChange,
+    handleSubmit,
+    isLoading,
   };
 }
