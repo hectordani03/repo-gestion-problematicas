@@ -7,9 +7,9 @@ export class Professor {
   }) {
     this.uuidUser = uuidUser;
 
-    if (typeof universityId != "number" && universityId.lenght !== 8)
+    if (universityId.length !== 4)
       throw new Error(
-        "University ID must be exactly 8 characters long and consist of numbers."
+        "University ID must be exactly 4 characters long and consist of numbers."
       );
 
     this.universityId = universityId;
