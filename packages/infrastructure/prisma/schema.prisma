@@ -1,26 +1,13 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
-// Agregue binaryTargets = ["native", "rhel-openssl-3.0.x"] porque el que tienes no es compatible para mi sistema
 generator client {
   provider      = "prisma-client-js"
   output        = "../generated/prisma"
 }
 
 datasource db {
-  // ==== DEPLOY LOCALLY
   provider = "postgresql"
   url      = env("DATABASE_URL")
-
-  // ==== TEST
-  // provider = "sqlite"
-  // url      = env("DATABASE_URL")
 }
 
-// ================== USERS RELATED MODELS ==================
 model User {
   uuid_user   String       @id @default(uuid())
   email       String       @unique
@@ -29,17 +16,14 @@ model User {
   middleName  String?      @map("middle_name")
   lastName    String?      @map("last_name")
   status      Int?         @map("user_status_id")
-  userStatus  User_Status? @relation(fields: [status], references: [user_status_id])
-  lastLoginIp String?      @map("last_login_ip")
   lastLoginAt DateTime?    @map("last_login_at")
   createdAt   DateTime     @default(now()) @map("created_at")
   updatedAt   DateTime     @updatedAt @map("updated_at")
-
   admins      Admin[]
-  students    Student[]
-  professors  Professor[]
   outsiders   Outsider[]
-  Application Application[]
+  professors  Professor[]
+  students    Student[]
+  userStatus  User_Status? @relation(fields: [status], references: [user_status_id])
 
   @@index([email])
   @@map("Users")
@@ -50,8 +34,7 @@ model User_Status {
   name           String
   createdAt      DateTime @default(now()) @map("created_at")
   updatedAt      DateTime @updatedAt @map("updated_at")
-
-  users User[]
+  users          User[]
 
   @@map("User_Statuses")
 }
@@ -59,9 +42,9 @@ model User_Status {
 model Admin {
   uuid_admin String   @id @default(uuid())
   uuidUser   String   @map("uuid_user")
-  user       User     @relation(fields: [uuidUser], references: [uuid_user])
   createdAt  DateTime @default(now()) @map("created_at")
   updatedAt  DateTime @updatedAt @map("updated_at")
+  user       User     @relation(fields: [uuidUser], references: [uuid_user])
 
   @@map("Admins")
 }
@@ -69,14 +52,14 @@ model Admin {
 model Student {
   uuid_student   String          @id @default(uuid())
   uuidUser       String          @map("uuid_user")
-  user           User            @relation(fields: [uuidUser], references: [uuid_user])
   universityId   BigInt          @unique @map("university_id")
   averageGrade   Float?          @map("average_grade")
   enrollmentYear DateTime?       @map("enrollment_year")
   status         Int?            @map("student_status_id")
-  studentStatus  Student_Status? @relation(fields: [status], references: [student_status_id])
   createdAt      DateTime        @default(now()) @map("created_at")
   updatedAt      DateTime        @updatedAt @map("updated_at")
+  studentStatus  Student_Status? @relation(fields: [status], references: [student_status_id])
+  user           User            @relation(fields: [uuidUser], references: [uuid_user])
 
   @@index([uuidUser])
   @@index([universityId])
@@ -84,12 +67,11 @@ model Student {
 }
 
 model Student_Status {
-  student_status_id Int      @id @default(autoincrement())
+  student_status_id Int       @id @default(autoincrement())
   name              String
-  createdAt         DateTime @default(now()) @map("created_at")
-  updatedAt         DateTime @updatedAt @map("updated_at")
-
-  students Student[]
+  createdAt         DateTime  @default(now()) @map("created_at")
+  updatedAt         DateTime  @updatedAt @map("updated_at")
+  students          Student[]
 
   @@map("Student_Statuses")
 }
@@ -97,12 +79,12 @@ model Student_Status {
 model Professor {
   uuid_professor String          @id @default(uuid())
   uuidUser       String          @map("uuid_user")
-  user           User            @relation(fields: [uuidUser], references: [uuid_user])
   universityId   BigInt          @unique @map("university_id")
   role           Int?            @map("professor_role_id")
-  professorRole  Professor_Role? @relation(fields: [role], references: [professor_role_id])
   createdAt      DateTime        @default(now()) @map("created_at")
   updatedAt      DateTime        @updatedAt @map("updated_at")
+  professorRole  Professor_Role? @relation(fields: [role], references: [professor_role_id])
+  user           User            @relation(fields: [uuidUser], references: [uuid_user])
 
   @@index([uuidUser])
   @@index([universityId])
@@ -110,12 +92,11 @@ model Professor {
 }
 
 model Professor_Role {
-  professor_role_id Int      @id @default(autoincrement())
+  professor_role_id Int         @id @default(autoincrement())
   name              String
-  createdAt         DateTime @default(now()) @map("created_at")
-  updatedAt         DateTime @updatedAt @map("updated_at")
-
-  professors Professor[]
+  createdAt         DateTime    @default(now()) @map("created_at")
+  updatedAt         DateTime    @updatedAt @map("updated_at")
+  professors        Professor[]
 
   @@map("Professor_Roles")
 }
@@ -123,87 +104,12 @@ model Professor_Role {
 model Outsider {
   uuid_outsider    String   @id @default(uuid())
   uuidUser         String   @map("uuid_user")
-  user             User     @relation(fields: [uuidUser], references: [uuid_user])
   organizationName String?  @map("organization_name")
   phoneNumber      String?  @map("phone_number")
   createdAt        DateTime @default(now()) @map("created_at")
   updatedAt        DateTime @updatedAt @map("updated_at")
+  user             User     @relation(fields: [uuidUser], references: [uuid_user])
 
   @@index([uuidUser])
   @@map("Outsiders")
-}
-
-// ================== USERS RELATED MODELS ==================
-model Application {
-  // ===TEMP
-  outsiderName        String   @map("outsider_name")
-  phone               String?
-  email               String?
-  // ===END TEMP
-  uuid_application    String   @id @default(uuid())
-  // TODO: the uuid_user will be used temporaly.
-  // This will be removed to use outsiders instead
-  uuidUser            String   @map("uuid_user")
-  user                User     @relation(fields: [uuidUser], references: [uuid_user])
-  name                String
-  // facultades
-  topicInterest       String   @map("topic_interest")
-  // TEMP FIELD FOR DEADLINE
-  projectType         String   @map("project_type")
-  // type                Int          @map("project_type_id")
-  // projectType         Project_Type @relation(fields: [type], references: [project_type_id])
-  estimatedTime       DateTime @map("estimated_time")
-  description         String?
-  extendedDescription String?  @map("extended_description")
-  visibility          String?
-  createdAt           DateTime @default(now()) @map("created_at")
-  updatedAt           DateTime @updatedAt @map("updated_at")
-
-  Project                     Project[]
-  Project_Type                Project_Type? @relation(fields: [project_TypeProject_type_id], references: [project_type_id])
-  project_TypeProject_type_id Int?
-
-  @@index([uuidUser])
-  @@index([topicInterest])
-  @@index([createdAt]) // filtering or sorting by date
-  @@map("Applications")
-}
-
-model Project {
-  // TODO: checkout reflux usage and solve how to save and use
-  // for a cleaner looks in the uri instead of uuid
-  uuid_project    String       @id @default(uuid())
-  uuidApplication String       @map("uuid_application")
-  application     Application  @relation(fields: [uuidApplication], references: [uuid_application])
-  topicInterest   String       @map("topic_interest")
-  type            Int          @map("project_type_id")
-  projectType     Project_Type @relation(fields: [type], references: [project_type_id])
-  estimatedTime   String       @map("estimated_time")
-  // uuid_team
-  status          String
-  createdAt       DateTime     @default(now()) @map("created_at")
-  updatedAt       DateTime     @updatedAt @map("updated_at")
-
-  @@index([uuidApplication])
-  @@index([type])
-  @@index([createdAt]) // filtering or sorting by date
-  @@index([status]) // filtering by status
-  @@map("Projects")
-}
-
-model Project_Type {
-  project_type_id     Int      @id @default(autoincrement())
-  name                String
-  estimatedTime       String   @map("estimated_time")
-  minTeamMembersSize  Int      @map("min_team_members_size")
-  maxTeamMembersSize  Int      @map("max_team_members_size")
-  minTeamAdvisorsSize Int      @map("min_team_advisors_size")
-  maxTeamAdvisorsSize Int      @map("max_team_advisors_size")
-  createdAt           DateTime @default(now()) @map("created_at")
-  updatedAt           DateTime @updatedAt @map("updated_at")
-
-  Application Application[]
-  Project     Project[]
-
-  @@map("Project_Types")
 }

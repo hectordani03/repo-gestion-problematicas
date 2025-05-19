@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const ProjectCard = ({ title, description, image }) => {
   return (
@@ -11,9 +12,13 @@ const ProjectCard = ({ title, description, image }) => {
       <div className='p-3'>
         <h3 className="font-bold text-xl mb-1">{title}</h3>
         <p className="text-md text-gray-700 mb-4">{description}</p>
-        <button className="bg-lime-600 text-white font-semibold py-2 px-4 rounded-lg hover:bg-lime-700 transition">
-            Ver detalles
-        </button>
+
+        <Link
+          to="/explore-projects/project-details"
+          className="inline-block bg-lime-600 text-white font-semibold py-2 px-4 rounded-lg hover:bg-lime-700 transition"
+        >
+          Ver detalles
+        </Link>
       </div>
     </div>
   );

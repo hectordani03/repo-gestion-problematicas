@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'; // 👈 agrega esto
+import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import LogoUDC from '@/assets/logo-udc.png';
 import avatar from '@/assets/avatar.png';
