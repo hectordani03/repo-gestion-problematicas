@@ -1,6 +1,8 @@
 // apps/mobile/src/features/auth/components/Checkbox.tsx
+
 import React from 'react'
-import { View, Text, Switch, StyleSheet } from 'react-native'
+import { View, Text, Switch } from 'react-native'
+import { CheckboxStyles } from '../../../styles'
 
 interface Props {
   value: boolean
@@ -8,16 +10,15 @@ interface Props {
   label?: string
 }
 
-const Checkbox: React.FC<Props> = ({ value, onValueChange, label = 'Acepto los términos y condiciones' }) => (
-  <View style={styles.container}>
+const Checkbox: React.FC<Props> = ({
+  value,
+  onValueChange,
+  label = 'Acepto los términos y condiciones',
+}) => (
+  <View style={CheckboxStyles.container}>
     <Switch value={value} onValueChange={onValueChange} />
-    <Text style={styles.label}>{label}</Text>
+    <Text style={CheckboxStyles.label}>{label}</Text>
   </View>
 )
 
 export default Checkbox
-
-const styles = StyleSheet.create({
-  container: { flexDirection: 'row', alignItems: 'center', marginBottom: 20 },
-  label: { marginLeft: 8, fontSize: 14, color: '#374151' },
-})
