@@ -1,7 +1,8 @@
 // apps/mobile/src/features/landing/components/LoginPrompt.tsx
 import React from 'react'
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
+import { View, Text, TouchableOpacity } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
+import { LoginPromptStyles as styles } from '../../../styles'
 
 const LoginPrompt = () => {
   const nav = useNavigation<any>()
@@ -16,9 +17,3 @@ const LoginPrompt = () => {
 }
 
 export default LoginPrompt
-
-const styles = StyleSheet.create({
-  container: { flexDirection: 'row', alignItems: 'center' },
-  text: { fontSize: 14, color: '#374151', marginRight: 6 },
-  link: { fontSize: 14, color: '#65A30D', fontWeight: '600' }
-})

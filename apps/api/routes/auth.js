@@ -1,8 +1,6 @@
-import { register } from "@reuc/application/auth/register.js";
-import { login } from "@reuc/application/auth/login.js";
-import { Warning } from "@reuc/application/entities/Warning.js";
-import { ValidationError } from "@reuc/application/entities/ValidationError.js";
-import { sessionRefresh } from "@reuc/application/auth/session.js";
+import session from "@reuc/application/auth/index.js";
+import { Warning } from "@reuc/application/errors/Warning.js";
+import { ValidationError } from "@reuc/application/errors/ValidationError.js";
 import express from "express";
 import csrf from "csurf";
 
@@ -13,7 +11,7 @@ const REFRESH_TOKEN_EXPIRES = process.env.REFRESH_TOKEN_EXPIRES_INT;
 
 authRouter.post("/refresh", (req, res) => {
   try {
-    const newAccessToken = sessionRefresh(req);
+    const newAccessToken = session.refresh(req);
 
     res.json({ accessToken: newAccessToken });
   } catch (err) {
@@ -23,7 +21,7 @@ authRouter.post("/refresh", (req, res) => {
 
 authRouter.post("/register", csrfProtection, async (req, res) => {
   try {
-    const response = await register({
+    const response = await session.register({
       body: req.body,
       ip: req.ip,
       userAgent: req.headers["user-agent"],
@@ -53,7 +51,7 @@ authRouter.post("/register", csrfProtection, async (req, res) => {
 
 authRouter.post("/login", csrfProtection, async (req, res) => {
   try {
-    const response = await login({
+    const response = await session.login({
       data: req.body,
       ip: req.ip,
       userAgent: req.headers["user-agent"],

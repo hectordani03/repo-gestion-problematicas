@@ -9,7 +9,7 @@ export default function useRegister() {
     password: "",
     confirmPassword: "",
     acceptTerms: false,
-    studentId: "",
+    universityId: "",
   });
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
