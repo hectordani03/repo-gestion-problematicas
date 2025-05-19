@@ -3,7 +3,7 @@ import {
   validatePassword,
   validatePasswordConfirm,
 } from "./validators.js";
-import { validateStudentId } from "../shared/validators.js";
+import { validateUniversityId } from "../shared/validators.js";
 import { ValidationError } from "../errors/ValidationError.js";
 import { registerUser } from "@reuc/domain/user/registerUser.js";
 
@@ -22,15 +22,15 @@ export async function register({ body, ip, userAgent }) {
     if (passConfirmError) throw new ValidationError(passConfirmError);
 
     if (body.email.endsWith("@ucol.mx")) {
-      const studentIdError = validateStudentId(body.studentId);
-      if (studentIdError) throw new ValidationError(studentIdError);
+      const universityIdError = validateUniversityId(body.universityId);
+      if (universityIdError) throw new ValidationError(universityIdError);
     }
 
-    const resObj = await registerUser({ body: body, ip, userAgent });
+    const resUsrObj = await registerUser({ body: body, ip, userAgent });
 
-    const { password, ...safeUser } = resObj.user;
-    const accessToken = resObj.accessToken;
-    const refreshToken = resObj.refreshToken;
+    const { password, ...safeUser } = resUsrObj.user;
+    const accessToken = resUsrObj.accessToken;
+    const refreshToken = resUsrObj.refreshToken;
 
     return { user: safeUser, tokens: { accessToken, refreshToken } };
   } catch (error) {
