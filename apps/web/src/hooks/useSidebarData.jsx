@@ -22,6 +22,8 @@ export function useSidebarData() {
     { id: 3, nombre: 'Proyecto Gamma' },
   ]);
 
+  const [openAccesibilidad, setOpenAccesibilidad] = useState(false);
+
   return {
     openProyectos,
     setOpenProyectos,
@@ -31,6 +33,8 @@ export function useSidebarData() {
     favoritos,
     openMiembros,
     setOpenMiembros,
-    miembros
+    miembros,
+    setOpenAccesibilidad,
+    openAccesibilidad
   };
 }
