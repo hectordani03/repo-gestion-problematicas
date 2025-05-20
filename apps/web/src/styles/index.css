@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @import "sweetalert2/dist/sweetalert2.min.css";
+@custom-variant dark (&:where(.dark, .dark *));
 
 textarea {
     form-sizing: content;
