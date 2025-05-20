@@ -6,19 +6,18 @@
 
 // Agregue binaryTargets = ["native", "rhel-openssl-3.0.x"] porque el que tienes no es compatible para mi sistema
 generator client {
-  provider      = "prisma-client-js"
-  output        = "../generated/prisma"
-  binaryTargets = ["native", "rhel-openssl-3.0.x"]
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
 }
 
 datasource db {
   // ==== DEPLOY LOCALLY
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  // provider = "postgresql"
+  // url      = env("DATABASE_URL")
 
   // ==== TEST
-  // provider = "sqlite"
-  // url      = env("DATABASE_URL")
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
 }
 
 // ================== USERS RELATED MODELS ==================
