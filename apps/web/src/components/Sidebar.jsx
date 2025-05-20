@@ -1,10 +1,21 @@
 import { Link } from "react-router-dom"
 import { useSidebarData } from '../hooks/useSidebarData';
-import { useTheme } from '../context/ThemeContext';
+import { useAccessibility } from '../context/AccessibilityContext';
 
 
 export default function Sidebar () {
-      const { isDark, toggleTheme } = useTheme();
+      const {
+      isDark,
+      toggleTheme,
+      largeText,
+      toggleLargeText,
+      highContrast,
+      toggleHighContrast,
+      dyslexiaFont,
+      toggleDyslexiaFont
+    } = useAccessibility();
+    
+
     const {
         openProyectos,
         setOpenProyectos,
@@ -14,7 +25,9 @@ export default function Sidebar () {
         favoritos,
         openMiembros,
         setOpenMiembros,
-        miembros
+        miembros,
+        setOpenAccesibilidad,
+        openAccesibilidad
       } = useSidebarData();
     
   return (
@@ -59,6 +72,7 @@ export default function Sidebar () {
                     </ul>
                     )}
                 </li>
+                
                 <li className="flex flex-col items-start w-full">
                     <button
                     onClick={() => setOpenFavoritos(!openFavoritos)}
@@ -103,11 +117,37 @@ export default function Sidebar () {
                     <svg className={`text-4xl ${isDark ? 'text-white' : ''}`} xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="currentColor" d="M12 22a2.98 2.98 0 0 0 2.818-2H9.182A2.98 2.98 0 0 0 12 22m7-7.414V10c0-3.217-2.185-5.927-5.145-6.742C13.562 2.52 12.846 2 12 2s-1.562.52-1.855 1.258C7.185 4.074 5 6.783 5 10v4.586l-1.707 1.707A1 1 0 0 0 3 17v1a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1v-1a1 1 0 0 0-.293-.707z"/></svg> 
                     Notificaciones
                 </li>
-                <li onClick={toggleTheme} className={`flex items-center gap-4 cursor-pointer ${isDark ? 'text-white' : ''}`}>
-                    <svg className={`text-4xl ${isDark ? 'text-white' : ''}`} xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.353 3C5.849 4.408 3 7.463 3 11.47A9.53 9.53 0 0 0 12.53 21c4.007 0 7.062-2.849 8.47-6.353C8.17 17.065 8.14 8.14 9.353 3"/></svg> 
-                    {isDark ? 'Modo Claro' : 'Modo Oscuro'}
-                    
+
+                <li className="flex flex-col items-start w-full">
+                    <button
+                    onClick={() => setOpenAccesibilidad(!openAccesibilidad)}
+                    className={`flex items-center gap-4 w-full ${isDark ? 'text-white' : ''}`}
+                    > 
+                    Accesibilidad
+                    <svg className={`text-2xl ${isDark ? 'text-white' : ''}`} xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="currentColor" d="m12 13.171l4.95-4.95l1.414 1.415L12 16L5.636 9.636L7.05 8.222z"/></svg>
+                    </button>
+                    {openAccesibilidad && (
+                    <ul className={`ml-18 text-base mt-1 space-y-1 w-6/12 ${isDark ? 'text-white' : ''}`}>
+                        <hr className='w-11/12 -translate-x-5 text-gray-400' />
+                        
+                        <li onClick={toggleTheme} className={`flex items-center gap-1 cursor-pointer ${isDark ? 'text-white' : ''}`}>
+                        <svg className={`text-4xl ${isDark ? 'text-white' : ''}`} xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.353 3C5.849 4.408 3 7.463 3 11.47A9.53 9.53 0 0 0 12.53 21c4.007 0 7.062-2.849 8.47-6.353C8.17 17.065 8.14 8.14 9.353 3"/></svg> 
+                        {isDark ? 'Modo Claro' : 'Modo Oscuro'}
+                        </li>
+                        <li onClick={toggleLargeText} className={`flex items-center gap-1 cursor-pointer ${isDark ? 'text-white' : ''}`}>
+                            {largeText ? 'Texto normal' : 'Texto grande'}
+                        </li>
+                        <li onClick={toggleHighContrast} className={`flex items-center gap-1 cursor-pointer ${isDark ? 'text-white' : ''}`}>
+                            {highContrast ? 'Contraste normal' : 'Alto contraste'}
+                        </li>
+                        <li onClick={toggleDyslexiaFont} className={`flex items-center gap-1 cursor-pointer ${isDark ? 'text-white' : ''}`}>
+                            {dyslexiaFont ? 'Fuente normal' : 'Fuente dislexia'}
+                        </li>
+                    </ul>
+                    )}
                 </li>
+                
+                
                 
                 <li className={`flex items-center gap-4 ${isDark ? 'text-white' : ''}`}>
                     <svg className={`text-4xl ${isDark ? 'text-white' : ''}`} xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 48 48"><defs><mask id="IconifyId196504e5616b92da57"><g fill="none"><path fill="#fff" stroke="#fff" stroke-linejoin="round" stroke-width="4" d="M24 44a19.94 19.94 0 0 0 14.142-5.858A19.94 19.94 0 0 0 44 24a19.94 19.94 0 0 0-5.858-14.142A19.94 19.94 0 0 0 24 4A19.94 19.94 0 0 0 9.858 9.858A19.94 19.94 0 0 0 4 24a19.94 19.94 0 0 0 5.858 14.142A19.94 19.94 0 0 0 24 44Z"/><path stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="4" d="M24 28.625v-4a6 6 0 1 0-6-6"/><path fill="#000" fill-rule="evenodd" d="M24 37.625a2.5 2.5 0 1 0 0-5a2.5 2.5 0 0 0 0 5" clip-rule="evenodd"/></g></mask></defs><path fill="currentColor" d="M0 0h48v48H0z" mask="url(#IconifyId196504e5616b92da57)"/></svg> 
