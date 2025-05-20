@@ -6,3 +6,14 @@ textarea {
     form-sizing: content;
 }
 
+.large-text {
+  font-size: 1.1rem;
+}
+
+.high-contrast {
+  filter: contrast(150%) saturate(150%);
+}
+
+.dyslexia-font {
+  font-family: 'OpenDyslexic', Arial, sans-serif;
+}
