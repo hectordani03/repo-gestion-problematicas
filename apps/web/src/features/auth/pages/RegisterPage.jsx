@@ -12,7 +12,7 @@ import registerImage from "@/assets/register-image.png";
 const RegisterPage = () => {
   const { form, handleChange, handleSubmit, isLoading } = useRegister();
   const { error } = useLogout();
-  const showStudentField = form.email.includes("@ucol.mx");
+  const showUniversityField = form.email.includes("@ucol.mx");
 
   return (
     <section className="flex items-center justify-between h-full w-full ml-20">
@@ -41,11 +41,11 @@ const RegisterPage = () => {
             onChange={handleChange}
           />
 
-          {showStudentField && (
+          {showUniversityField && (
             <AuthInput
-              label="Número de cuenta (8 alumnos / 6 maestros)"
-              name="studentId"
-              value={form.studentId}
+              label="Número de cuenta (8 alumnos / 4 maestros)"
+              name="universityId"
+              value={form.universityId}
               onChange={handleChange}
             />
           )}

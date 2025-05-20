@@ -11,12 +11,24 @@ export async function loginUser({ email, password, ip, userAgent }) {
 
   const updated = await updateLastLogin(user.uuid_user, ip);
 
-  const payload = { uuid_user: user.uuid_user, ip, ua: userAgent };
+  const payload = {
+    uuid_user: user.uuid_user,
+    role: `${user.role}:${user.uuid_role}`,
+    ip,
+    ua: userAgent,
+  };
 
   const accessToken = generateAccessToken(payload);
   const refreshToken = generateRefreshToken(payload);
 
-  return { user, updated, accessToken, refreshToken };
+  return {
+    user,
+    role: user.role,
+    uuidRole: uuid_role,
+    updated,
+    accessToken,
+    refreshToken,
+  };
 }
 
 async function updateLastLogin(uuid_user, newIP) {
