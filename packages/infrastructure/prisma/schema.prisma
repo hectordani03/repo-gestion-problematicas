@@ -58,7 +58,7 @@ model User_Status {
 
 model Admin {
   uuid_admin String   @id @default(uuid())
-  uuidUser   String   @map("uuid_user")
+  uuidUser   String   @unique @map("uuid_user")
   user       User     @relation(fields: [uuidUser], references: [uuid_user])
   createdAt  DateTime @default(now()) @map("created_at")
   updatedAt  DateTime @updatedAt @map("updated_at")
@@ -68,9 +68,9 @@ model Admin {
 
 model Student {
   uuid_student   String          @id @default(uuid())
-  uuidUser       String          @map("uuid_user")
+  uuidUser       String          @unique @map("uuid_user")
   user           User            @relation(fields: [uuidUser], references: [uuid_user])
-  universityId   BigInt          @unique @map("university_id")
+  universityId   String          @unique @map("university_id")
   averageGrade   Float?          @map("average_grade")
   enrollmentYear DateTime?       @map("enrollment_year")
   status         Int?            @map("student_status_id")
@@ -96,9 +96,9 @@ model Student_Status {
 
 model Professor {
   uuid_professor String          @id @default(uuid())
-  uuidUser       String          @map("uuid_user")
+  uuidUser       String          @unique @map("uuid_user")
   user           User            @relation(fields: [uuidUser], references: [uuid_user])
-  universityId   BigInt          @unique @map("university_id")
+  universityId   String          @unique @map("university_id")
   role           Int?            @map("professor_role_id")
   professorRole  Professor_Role? @relation(fields: [role], references: [professor_role_id])
   createdAt      DateTime        @default(now()) @map("created_at")
@@ -122,7 +122,7 @@ model Professor_Role {
 
 model Outsider {
   uuid_outsider    String   @id @default(uuid())
-  uuidUser         String   @map("uuid_user")
+  uuidUser         String   @unique @map("uuid_user")
   user             User     @relation(fields: [uuidUser], references: [uuid_user])
   organizationName String?  @map("organization_name")
   phoneNumber      String?  @map("phone_number")
