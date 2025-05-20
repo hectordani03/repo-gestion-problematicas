@@ -24,7 +24,7 @@ export async function loginUser({ email, password, ip, userAgent }) {
   return {
     user,
     role: user.role,
-    uuidRole: uuid_role,
+    uuidRole: user.uuid_role,
     updated,
     accessToken,
     refreshToken,
