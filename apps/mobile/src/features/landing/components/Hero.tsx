@@ -6,10 +6,11 @@ import { HeroStyles as styles } from '../../../styles'
 const Hero = () => (
   <View style={styles.container}>
     <Text style={styles.title}>
-      Repositorio para el registro, gestión y seguimiento de problemáticas del
-      sector productivo
+      Repositorio para el registro, gestión y seguimiento de{' '}
+       <Text style={styles.titlehighlight}>problemáticas</Text> del sector
+          productivo
     </Text>
-    <Text style={styles.subtitle}>Comienza ahora!</Text>
+    <Text style={styles.subtitle}>Comienza ahora</Text>
   </View>
 )
 

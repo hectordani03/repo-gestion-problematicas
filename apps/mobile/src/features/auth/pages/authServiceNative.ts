@@ -2,6 +2,7 @@
 
 // url de env
 import { API_URL } from '@env'
+import { showError } from '../utils/toast'
 
 async function getCSRFToken(): Promise<string> {
   const res = await fetch(`${API_URL}/csrf-token`, {
@@ -34,7 +35,12 @@ export async function register(data: RegisterData) {
 
   const bodyRes = await res.json()
   if (!res.ok) {
-    const msg = res.status !== 422 ? bodyRes.err : 'Hubo un problema en el registro'
+    const msg =
+      res.status !== 422
+        ? bodyRes.err
+        : 'Hubo un problema en el registro'
+    // Muestro alerta antes de devolver el objeto
+    showError(msg)
     return { success: false, err: msg }
   }
 
@@ -56,7 +62,12 @@ export async function login(email: string, password: string) {
 
   const bodyRes = await res.json()
   if (!res.ok) {
-    const msg = res.status !== 422 ? bodyRes.err : 'Hubo un problema en el login'
+    const msg =
+      res.status !== 422
+        ? bodyRes.err
+        : 'Hubo un problema en el login'
+    // Muestro alerta antes de devolver el objeto
+    showError(msg)
     return { success: false, err: msg }
   }
 
@@ -71,6 +82,9 @@ export async function logout() {
   })
 
   const bodyRes = await res.json()
-  if (!res.ok) return { success: false, err: bodyRes.err }
+  if (!res.ok) {
+    showError(bodyRes.err)
+    return { success: false, err: bodyRes.err }
+  }
   return { success: true, message: bodyRes.message }
 }
