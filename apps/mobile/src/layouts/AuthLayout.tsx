@@ -1,8 +1,9 @@
 // apps/mobile/src/layouts/AuthLayout.tsx
 
 import React from 'react'
-import { SafeAreaView, View, StyleSheet } from 'react-native'
+import { SafeAreaView, View } from 'react-native'
 import MobileHeader from '../components/MobileHeader'
+import { AuthLayoutStyles as styles } from '../styles/layouts/AuthLayout.styles'
 
 type Props = { children: React.ReactNode }
 
@@ -14,8 +15,3 @@ export default function AuthLayout({ children }: Props) {
     </SafeAreaView>
   )
 }
-
-const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#fff' },
-  content: { flex: 1, padding: 16 }
-})

@@ -1,28 +1,34 @@
 // apps/mobile/src/styles/index.ts
 
-// Theme tokens
+//Theme tokens
 export * from './theme/colors'
 export * from './theme/spacing'
 export * from './theme/typography'
 
-// Auth Components
-export {
-  AltLinkStyles,
-  AuthInputStyles,
-  CheckboxStyles,
-  SubmitBtnStyles,
-  AuthFormStyles,
-} from './components/auth/authComponents.styles'
+//Auth components 
+export * from './components/auth/authComponents.styles'
 
-// Landing Components
+//Landing components
 export {
+  GoogleBtnStyles,
   HeroStyles,
   LoginPromptStyles,
-  GoogleBtnStyles,
   RegisterBtnStyles,
 } from './components/landing/landingComponents.styles'
 
-// Screen styles
-export { LoginPageStyles }    from './screens/LoginPage.styles'
-export { RegisterPageStyles } from './screens/RegisterPage.styles'
-export { LandingPageStyles }  from './screens/LandingPage.styles'
+//Dashboard components 
+export * from './components/dashboard/dashboardComponents.styles'
+export { DashboardTabsStyles } from './components/dashboard/DashboardTabs.styles'
+export { BottomNavStyles }       from './components/header/BottomNav.styles'
+export { MobileHeaderStyles } from './components/header/MobileHeader.styles'
+
+//Screen styles 
+export { LandingPageStyles }   from './screens/LandingPage.styles'
+export { LoginPageStyles }     from './screens/LoginPage.styles'
+export { RegisterPageStyles }  from './screens/RegisterPage.styles'
+export { DashboardMainStyles } from './screens/DashboardMain.styles'
+
+//Layout styles
+export { PlainLayoutStyles }     from './layouts/PlainLayout.styles'
+export { AuthLayoutStyles }      from './layouts/AuthLayout.styles'
+export { DashboardLayoutStyles } from './layouts/DashboardLayout.styles'

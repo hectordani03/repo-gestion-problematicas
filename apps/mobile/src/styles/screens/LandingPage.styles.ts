@@ -15,8 +15,11 @@ export const LandingPageStyles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     paddingHorizontal: spacing.lg,
-    paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight ?? spacing.lg : 0,
-    paddingBottom: spacing.xl,
+    paddingTop:
+      Platform.OS === 'android'
+        ? StatusBar.currentHeight ?? spacing.lg
+        : 0,
+    paddingBottom: spacing.xxl,
   },
   logo: {
     fontSize: typography.xl4,
@@ -28,24 +31,7 @@ export const LandingPageStyles = StyleSheet.create({
   logoHighlight: {
     color: palette.primary,
   },
-  tagline: {
-    fontSize: typography.lg,
-    color: palette.titleDescription,
-    textAlign: 'center',
-    lineHeight: spacing.lg,
-    marginBottom: spacing.md,
-  },
-  taglineHighlight: {
-    color: palette.primary,
-    fontWeight: '700',
-  },
-  cta: {
-    fontSize: typography.xl,
-    fontWeight: '700',
-    color: palette.text,
-    marginBottom: spacing.lg,
-    textAlign: 'center',
-  },
+
   orWrapper: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -55,7 +41,7 @@ export const LandingPageStyles = StyleSheet.create({
   line: {
     flex: 1,
     height: 1,
-    backgroundColor: palette.grayLight,
+    backgroundColor: palette.graybtn
   },
   or: {
     marginHorizontal: spacing.sm,
