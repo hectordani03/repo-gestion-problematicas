@@ -1,10 +1,11 @@
 // apps/mobile/src/features/landing/pages/LandingPage.tsx
 
 import React from 'react'
-import { View, Text, ScrollView, StatusBar } from 'react-native'
+import { View, ScrollView, Text, StatusBar } from 'react-native'
 import GoogleBtn from '../components/GoogleBtn'
-import RegisterBtn from '../components/RegisterBtn'
+import Hero from '../components/Hero'
 import LoginPrompt from '../components/LoginPrompt'
+import RegisterBtn from '../components/RegisterBtn'
 import { LandingPageStyles as styles } from '../../../styles'
 
 export default function LandingPage() {
@@ -21,13 +22,7 @@ export default function LandingPage() {
           Re<Text style={styles.logoHighlight}>UC</Text>
         </Text>
 
-        <Text style={styles.tagline}>
-          Repositorio para el registro, gestión y seguimiento de{' '}
-          <Text style={styles.taglineHighlight}>problemáticas</Text> del sector
-          productivo
-        </Text>
-
-        <Text style={styles.cta}>Comienza ahora</Text>
+        <Hero />
 
         <GoogleBtn />
 

@@ -1,15 +1,18 @@
 // apps/mobile/src/routes/AppNavigator.tsx
 
 import React from 'react'
+import { View } from 'react-native'
 import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 
-import PlainLayout from '../layouts/PlainLayout'
-import AuthLayout from '../layouts/AuthLayout'
+import PlainLayout     from '../layouts/PlainLayout'
+import AuthLayout      from '../layouts/AuthLayout'
+import DashboardLayout from '../layouts/DashboardLayout'
 
-import LandingPage from '../features/landing/pages/LandingPage'
-import LoginPage from '../features/auth/pages/LoginPageNative'
-import RegisterPage from '../features/auth/pages/RegisterPageNative'
+import LandingPage   from '../features/landing/pages/LandingPage'
+import LoginPage     from '../features/auth/pages/LoginPageNative'
+import RegisterPage  from '../features/auth/pages/RegisterPageNative'
+import DashboardMain from '../features/dashboard/pages/DashboardMain'
 
 const Stack = createNativeStackNavigator()
 
@@ -28,7 +31,7 @@ const AppNavigator: React.FC = () => (
         )}
       </Stack.Screen>
 
-      {/* Login y Register con AuthLayout */}
+      {/* Login & Register */}
       <Stack.Screen name="Login">
         {() => (
           <AuthLayout>
@@ -36,12 +39,47 @@ const AppNavigator: React.FC = () => (
           </AuthLayout>
         )}
       </Stack.Screen>
-
       <Stack.Screen name="Register">
         {() => (
           <AuthLayout>
             <RegisterPage />
           </AuthLayout>
+        )}
+      </Stack.Screen>
+
+      {/* Dashboard flow */}
+      <Stack.Screen name="Dashboard">
+        {() => (
+          <DashboardLayout>
+            <DashboardMain />
+          </DashboardLayout>
+        )}
+      </Stack.Screen>
+
+    
+      <Stack.Screen name="Messages">
+        {() => (
+          <DashboardLayout>
+            <View /> 
+          </DashboardLayout>
+        )}
+      </Stack.Screen>
+
+      {/* Notifications screen */}
+      <Stack.Screen name="Notifications">
+        {() => (
+          <DashboardLayout>
+            <View /> 
+          </DashboardLayout>
+        )}
+      </Stack.Screen>
+
+      {/* Profile screen */}
+      <Stack.Screen name="Profile">
+        {() => (
+          <DashboardLayout>
+            <View /> 
+          </DashboardLayout>
         )}
       </Stack.Screen>
     </Stack.Navigator>

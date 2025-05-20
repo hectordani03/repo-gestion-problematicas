@@ -7,6 +7,7 @@ export const palette = {
     text:          '#111827',
     textSecondary: '#6B7280',
     onPrimary:     '#FFFFFF',
+    onGBtn:        '#374151',
     titleDescription: '#1F2937',
   
     // Errores
@@ -17,6 +18,8 @@ export const palette = {
   
     // Neutros
     grayLight:     '#F3F4F6',
+    graybtn:       '#E5E7EB',
     gray:          '#9CA3AF',
+    grayExtraLight:'#F3F4F6',
   };
   
