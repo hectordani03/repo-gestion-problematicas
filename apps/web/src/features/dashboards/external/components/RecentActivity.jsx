@@ -1,4 +1,4 @@
-import avatar from '../../../assets/avatar.png';
+import avatar from '/avatar.png';
 
 const RecentActivity = () => {
     return (

@@ -23,7 +23,7 @@ const updates = [
   
   const RecentActivity = () => {
     return (
-      <div className="rounded-2xl p-6 shadow-xl w-3/12 mt-3 mr-5 h-fit">
+      <div className="rounded-2xl p-6 shadow-xl w-2/12 mt-3 mr-5 h-fit">
         <h2 className="text-lg font-bold mb-6">Últimos cambios</h2>
         <div className="relative pl-4 ">
           <div className="absolute top-0 left-2 w-0.5 h-full bg-gray-200"></div>

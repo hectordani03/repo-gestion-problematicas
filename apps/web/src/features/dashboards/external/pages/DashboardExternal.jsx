@@ -3,13 +3,13 @@ import ProjectList from '../components/ProjectList'
 import RecentProjects from '../components/RecentProjects'
 import RecentActivity from '../components/RecentActivity'
 import ProjectSummary from '../components/ProjectSummary'
-import Timeline from '@/features/dashboard/components/Timeline'
+// import Timeline from '@/features/dashboards/dashboard/components/Timeline'
 
 
-const DashboardMain = () => {
+const DashboardExternal = () => {
   return (
     <>
-    <div className="p-4 grid gap-4 xl:grid-cols-3 w-9/12">
+    <div className="p-4 grid gap-4 xl:grid-cols-3 w-12/12">
       <div className="col-span-3 items-start">
         <ProjectStats />
       </div>
@@ -24,9 +24,9 @@ const DashboardMain = () => {
         </div>
       </div>
     </div>
-    <Timeline />
+    {/* <Timeline /> */}
     </>
   )
 }
 
-export default DashboardMain
+export default DashboardExternal

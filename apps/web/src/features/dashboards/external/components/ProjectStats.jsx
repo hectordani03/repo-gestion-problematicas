@@ -1,5 +1,3 @@
-import { useEffect, useState } from 'react'
-
 const stats = [
   {
     label: 'Miembros Activos',
