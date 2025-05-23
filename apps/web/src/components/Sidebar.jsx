@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom"
 import { useSidebarData } from '../hooks/useSidebarData';
-import { useAccessibility } from '../context/AccessibilityContext';
+import { useAccessibility } from '../context/AccesibilityContext.jsx';
 
 
 export default function Sidebar () {
@@ -67,7 +67,14 @@ export default function Sidebar () {
                     <ul className={`ml-18 text-base mt-1 space-y-1 w-6/12 ${isDark ? 'text-white' : ''}`}>
                         <hr className='w-11/12 -translate-x-5 text-gray-400' />
                         {proyectos.map((proyecto) => (
-                            <li className='text-start' key={proyecto.id}>{proyecto.nombre}</li>
+                        <li className='text-start flex items-center gap-2' key={proyecto.id}>
+                            <img 
+                            src={proyecto.image} 
+                            alt={proyecto.nombre}
+                            className="w-6 h-6 rounded-full object-cover"
+                            />
+                            {proyecto.nombre}
+                        </li>
                         ))}
                     </ul>
                     )}
@@ -86,7 +93,14 @@ export default function Sidebar () {
                     <ul className={`ml-18 text-base mt-1 space-y-1 w-6/12 ${isDark ? 'text-white' : ''}`}>
                         <hr className='w-11/12 -translate-x-5 text-gray-400' />
                         {favoritos.map((favorito) => (
-                            <li className='text-start' key={favorito.id}>{favorito.nombre}</li>
+                        <li className='text-start flex items-center gap-2' key={favorito.id}>
+                            <img 
+                            src={favorito.image} 
+                            alt={favorito.nombre}
+                            className="w-6 h-6 rounded-full object-cover"
+                            />
+                            {favorito.nombre}
+                        </li>
                         ))}
                     </ul>
                     )}
@@ -104,7 +118,14 @@ export default function Sidebar () {
                     <ul className={`ml-18 text-base mt-1 space-y-1 w-6/12 ${isDark ? 'text-white' : ''}`}>
                         <hr className='w-11/12 -translate-x-5 text-gray-400' />
                         {miembros.map((miembro) => (
-                            <li className='text-start' key={miembro.id}>{miembro.nombre}</li>
+                        <li className='text-start flex items-center gap-2' key={miembro.id}>
+                            <img 
+                            src={miembro.image} 
+                            alt={miembro.nombre}
+                            className="w-6 h-6 rounded-full object-cover"
+                            />
+                            {miembro.nombre}
+                        </li>
                         ))}
                     </ul>
                     )}

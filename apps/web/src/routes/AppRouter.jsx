@@ -3,7 +3,8 @@ import LandingPage from '@/features/landing/pages/LandingPage'
 import RegisterPage from '@/features/auth/pages/RegisterPage'
 import LoginPage from '@/features/auth/pages/LoginPage'
 // import DashboardMain from '@/features/dashboard/pages/DashboardMain'
-import DashboardMain from '@/features/dashboard/pages/DashboardMain'
+import DashboardExternal from '@/features/dashboards/external/pages/DashboardExternal'
+import DashboardStudent from '@/features/dashboards/student/pages/DashboardStudent'
 import NotFound from '@/pages/404'
 
 import PlainLayout from '@/layouts/PlainLayout'
@@ -33,7 +34,9 @@ const AppRouter = () => {
         {/* TODO: Hay que hacer un request a la API para verificar
             que en verdad el usuario este logeado (auyn no hay ruta
             para eso en la API) */}
-        <Route path="/dashboard" element={<DashboardMain />} />
+        {/* <Route path="/dashboard" element={<DashboardMain />} /> */}
+        <Route path="/dashboard" element={<DashboardExternal />} />
+        <Route path="/dashboard-student" element={<DashboardStudent />} />
         {/* Aquí puedes anidar más rutas como /dashboard/proyectos */}
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/request-project" element={<RequestProject />} />

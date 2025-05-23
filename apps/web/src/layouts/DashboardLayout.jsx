@@ -1,7 +1,7 @@
 import { Outlet } from 'react-router-dom'
 import Sidebar from '@/components/Sidebar'
 import Header from '@/components/Header/Header'
-import Timeline from '@/features/dashboard/components/Timeline'
+import Timeline from '@/components/Timeline'
 const DashboardLayout = () => {
   return (
     <>
@@ -11,6 +11,7 @@ const DashboardLayout = () => {
         <div className="flex flex-1">
           <Outlet />
         </div>
+        <Timeline />
       </main>
     </>
   )
