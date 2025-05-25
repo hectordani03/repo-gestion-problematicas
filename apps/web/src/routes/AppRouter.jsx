@@ -8,7 +8,6 @@ import LoginPage from '@/features/auth/pages/LoginPage'
 import AdminLayout from '@/features/admin/layouts/AdminLayout'
 import AdminTablePageWrapper from '@/features/admin/pages/AdminTablePageWrapper'
 // DASHBOARD
-// import DashboardMain from '@/features/dashboard/pages/DashboardMain'
 import DashboardExternal from '@/features/dashboards/external/pages/DashboardExternal'
 import DashboardStudent from '@/features/dashboards/student/pages/DashboardStudent'
 // PROFILE
