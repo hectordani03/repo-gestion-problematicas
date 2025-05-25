@@ -6,6 +6,7 @@ import dotenv from "dotenv";
 
 import { authRouter } from "./routes/auth.js";
 import { projectRouter } from "./routes/project.js";
+import { adminRouter } from "./routes/admin.js";
 
 dotenv.config();
 
@@ -39,6 +40,9 @@ app.use("/auth", authRouter);
 
 // Rutas Project
 app.use("/project", projectRouter);
+
+// Rutas Admin
+app.use("/admin", adminRouter);
 
 // Rutas base
 app.get("/", (req, res) => {
