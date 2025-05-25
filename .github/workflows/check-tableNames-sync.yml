@@ -1,12 +1,14 @@
-name: Infrastructure Layer Tests
+name: Verify tableNames Mapping
 
 on:
   push:
     paths:
-      - "packages/infrastructure/**"
+      - "packages/infrastructure/prisma/schema.prisma"
+      - "packages/infrastructure/migrations/**"
   pull_request:
     paths:
-      - "packages/infrastructure/**"
+      - "packages/infrastructure/prisma/schema.prisma"
+      - "packages/infrastructure/migrations/**"
 # ================ REPEAT THIS PART IN EVERY WORKFLOW
 jobs:
   test:
@@ -46,8 +48,8 @@ jobs:
         env:
           DATABASE_URL: "file:../test.db?connection_limit=1"
       # ================ HERE START THE NEW TESTS
-      - name: Run Vitest
-        run: pnpm test
+      - name: Run tableNames mapping validation
+        run: node scripts/validate-tableNames.js
         env:
           DATABASE_URL: "file:../test.db?connection_limit=1"
 
