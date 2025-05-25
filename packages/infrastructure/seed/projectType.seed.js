@@ -1,0 +1,42 @@
+export const projectTypeSeedData = [
+  {
+    name: "Proyectos Integradores",
+    estimatedTime: "6 meses",
+    minTeamMembersSize: 4,
+    maxTeamMembersSize: 5,
+    minTeamAdvisorsSize: 0,
+    maxTeamAdvisorsSize: 0,
+  },
+  {
+    name: "Servicio Social Constitucional",
+    estimatedTime: "6 meses (480 hrs)",
+    minTeamMembersSize: 1,
+    maxTeamMembersSize: 4,
+    minTeamAdvisorsSize: 1,
+    maxTeamAdvisorsSize: 1,
+  },
+  {
+    name: "Tesis",
+    estimatedTime: "1 año",
+    minTeamMembersSize: 1,
+    maxTeamMembersSize: 5,
+    minTeamAdvisorsSize: 1,
+    maxTeamAdvisorsSize: 2,
+  },
+  {
+    name: "Proyectos de investigación",
+    estimatedTime: "1-3 año/s",
+    minTeamMembersSize: 0,
+    maxTeamMembersSize: 0,
+    minTeamAdvisorsSize: 0,
+    maxTeamAdvisorsSize: 0,
+  },
+  {
+    name: "Prácticas profesionales",
+    estimatedTime: "6 meses (500 hrs)",
+    minTeamMembersSize: 0,
+    maxTeamMembersSize: 0,
+    minTeamAdvisorsSize: 0,
+    maxTeamAdvisorsSize: 0,
+  },
+];
