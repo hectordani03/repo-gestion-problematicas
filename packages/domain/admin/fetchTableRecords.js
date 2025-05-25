@@ -15,7 +15,7 @@ export async function fetchTableRecords({
 
   const tableName = tableNames[index];
 
-  const [tableRecords, stats] = await Promise.all([
+  const [tableRecords, recordsStats, stats] = await Promise.all([
     adminRepo.fetchLimitRecords({
       tableName,
       query,
@@ -25,11 +25,15 @@ export async function fetchTableRecords({
     }),
     adminRepo.fetchTableStats({
       tableName,
+      query,
+    }),
+    adminRepo.fetchTableStats({
+      tableName,
     }),
   ]);
 
   const totalItems = stats.totalItems;
-  const totalPages = Math.ceil(tableRecords.length / perPage);
+  const totalPages = Math.ceil(recordsStats.totalItems / perPage);
 
   return {
     records: tableRecords,

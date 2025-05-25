@@ -16,7 +16,7 @@ export const adminRepo = {
 
     return tableSchemas[model];
   },
-  async fetchTableStats({ tableName }) {
+  async fetchTableStats({ tableName, query }) {
     const models = Object.keys(tableNames);
     const tables = Object.values(tableNames);
     if (!tables.includes(tableName))
@@ -29,6 +29,10 @@ export const adminRepo = {
     const aggregateConfig = {
       _count: { _all: true },
     };
+
+    if (query) {
+      aggregateConfig.where = query;
+    }
 
     if (schema && "createdAt" in schema) {
       aggregateConfig._min = { createdAt: true };
