@@ -27,7 +27,7 @@ export async function register(data) {
 
   if (!res.ok) {
     const msg =
-      res.status !== "422" ? bodyRes.err : "Hubo un problema en el registro";
+      res.status !== 422 ? bodyRes.err : "Hubo un problema en el registro";
 
     return { success: false, err: msg };
   }
@@ -55,7 +55,7 @@ export async function login(data) {
 
   if (!res.ok) {
     const msg =
-      res.status !== "422" ? bodyRes.err : "Hubo un problema en el login";
+      res.status !== 422 ? bodyRes.err : "Hubo un problema en el login";
 
     return { success: false, err: msg };
   }
