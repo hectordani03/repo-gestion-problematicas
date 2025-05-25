@@ -1,18 +1,26 @@
 import { Routes, Route } from 'react-router-dom'
+// LANDING
 import LandingPage from '@/features/landing/pages/LandingPage'
+// AUTH
 import RegisterPage from '@/features/auth/pages/RegisterPage'
 import LoginPage from '@/features/auth/pages/LoginPage'
-// import DashboardMain from '@/features/dashboard/pages/DashboardMain'
+// ADMIN
+import AdminLayout from '@/features/admin/layouts/AdminLayout'
+import AdminTablePageWrapper from '@/features/admin/pages/AdminTablePageWrapper'
+// DASHBOARD
 import DashboardMain from '@/features/dashboard/pages/DashboardMain'
-import NotFound from '@/pages/404'
-
-import PlainLayout from '@/layouts/PlainLayout'
-import AuthLayout from '@/layouts/AuthLayout'
-import DashboardLayout from '@/layouts/DashboardLayout'
+// PROFILE
 import ProfilePage from '@/features/profile/pages/ProfilePage'
+// PROJECTS
 import RequestProject from '@/features/projects/pages/RequestProject'
 import ExploreProjects from '@/features/projects/pages/ExploreProjects'
 import ProjectDetails from '@/features/projects/pages/ProjectDetails'
+// LAYOUTS
+import PlainLayout from '@/layouts/PlainLayout'
+import AuthLayout from '@/layouts/AuthLayout'
+import DashboardLayout from '@/layouts/DashboardLayout'
+// ERROR
+import NotFound from '@/pages/404'
 
 const AppRouter = () => {
   return (
@@ -42,6 +50,11 @@ const AppRouter = () => {
         {/* HAY QUE MANEJARLA LAS URL CON SLUGS: */}
         {/* <Link to={`/explore-projects/${project.slug}`}>Ver detalles</Link> */}
         {/* <Route path="/explore-projects/:slug" element={ProjectDetails} /> */}
+      </Route>
+
+      {/* Rutas de administrador */}
+      <Route path="/admin" element={<AdminLayout />}>
+        <Route path=":tableName" element={<AdminTablePageWrapper />} />
       </Route>
 
       {/* 404 */}
