@@ -12,13 +12,29 @@ generator client {
 
 datasource db {
   // ==== DEPLOY LOCALLY
-  // provider = "postgresql"
-  // url      = env("DATABASE_URL")
-
-  // ==== TEST
-  provider = "sqlite"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+// ========= PRISMA MODELING RULES =========
+// DO NOT BREAK THESE RULES – the API and Admin Panel depend on them
+//
+// 1. Model names must use Pascal_Snake_Case (Singular) (e.g., `User`, `ProjectType`)
+// 2. Each model must map to a Pascal_Snake_Case (Plural) table using `@@map()`
+//       ⤷ Example: `@@map("Users")`, `@@map("User_Statuses")`
+// 3. All field names must use camelCase
+// 4. Any field must be stored in `snake_case` in the database explicitly mapped using `@map()`
+//       ⤷ Example: `middleName String? @map("middle_name")`
+// 5. All models must include: 
+//       - `createdAt DateTime @default(now()) @map("created_at")`
+//       - `updatedAt DateTime @updatedAt @map("updated_at")`
+// 6. Use full English words in model and field names. Avoid abbreviations.
+// 7. Use consistent naming for foreign key fields (e.g., `userStatusId`, mapped to `user_status_id`)
+// 8. Primary keys must follow these naming rules:
+//       - If it is an incremental ID, it must be named as `modelname_id`.
+//       - If it is a UUID, it must be named as `uuid_modelname`.
+// These conventions are required to support dynamic table/field mapping, introspection, and UI consistency.
+// Breaking them may cause the system to crash or behave unpredictably.
 
 // ================== USERS RELATED MODELS ==================
 model User {

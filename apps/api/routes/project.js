@@ -32,8 +32,6 @@ projectRouter.post(
         },
       });
     } catch (err) {
-      console.log("error post", err);
-
       return res.status(400).json({ success: false, err: err.message });
     }
   }

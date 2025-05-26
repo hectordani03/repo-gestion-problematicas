@@ -15,7 +15,7 @@ authRouter.post("/refresh", (req, res) => {
 
     res.json({ accessToken: newAccessToken });
   } catch (err) {
-    res.status(401).json({ error: "Invalid refresh token" });
+    res.status(401).json({ error: "Token inválido." });
   }
 });
 
@@ -103,7 +103,7 @@ authRouter.post("/logout", (req, res) => {
         sameSite: "Strict",
       })
       .status(200)
-      .json({ success: true, message: "Logged out successfully" });
+      .json({ success: true, message: "Sesión cerrada exitosamente" });
   } catch (err) {
     return res.status(400).json({ success: false, err: err.message });
   }

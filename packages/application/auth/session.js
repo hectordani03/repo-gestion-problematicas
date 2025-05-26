@@ -27,6 +27,7 @@ export function sessionRefresh(req) {
 
     const newAccessToken = generateAccessToken({
       uuid_user: decoded.uuid_user,
+      role: decoded.role,
       ip: req.ip,
       ua: req.headers["user-agent"],
     });
