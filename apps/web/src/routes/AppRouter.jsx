@@ -10,6 +10,7 @@ import AdminTablePageWrapper from '@/features/admin/pages/AdminTablePageWrapper'
 // DASHBOARD
 import DashboardExternal from '@/features/dashboards/external/pages/DashboardExternal'
 import DashboardStudent from '@/features/dashboards/student/pages/DashboardStudent'
+import DashboardFaculty from '@/features/dashboards/faculty/pages/DashboardFaculty'
 // PROFILE
 import ProfilePage from '@/features/profile/pages/ProfilePage'
 // PROJECTS
