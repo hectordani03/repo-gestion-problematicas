@@ -34,9 +34,10 @@
 │   │   ├── NotificationDropdown.jsx
 │   │   └── Notification.jsx
 │   ├── Header.jsx
-│   └── Sidebar.jsx
+│   ├── Sidebar.jsx
+│   └── Timeline.jsx
 ├── context
-│   └── ThemeContext.jsx
+│   └── AccesibilityContext.jsx
 ├── estructura.txt
 ├── estructura-web-frontend.txt
 ├── features
@@ -56,19 +57,34 @@
 │   │   └── pages
 │   │       ├── LoginPage.jsx
 │   │       └── RegisterPage.jsx
-│   ├── dashboard
-│   │   ├── components
-│   │   │   ├── ProjectList.jsx
-│   │   │   ├── ProjectStats.jsx
-│   │   │   ├── ProjectSummary.jsx
-│   │   │   ├── RecentActivity.jsx
-│   │   │   ├── RecentProjects.jsx
-│   │   │   └── Timeline.jsx
-│   │   ├── hooks
-│   │   ├── index.jsx
-│   │   ├── pages
-│   │   │   └── DashboardMain.jsx
-│   │   └── services
+│   ├── dashboards
+│   │   ├── external
+│   │   │   ├── components
+│   │   │   │   ├── ProjectList.jsx
+│   │   │   │   ├── ProjectStats.jsx
+│   │   │   │   ├── ProjectSummary.jsx
+│   │   │   │   ├── RecentActivity.jsx
+│   │   │   │   ├── RecentProjects.jsx
+│   │   │   │   └── Timeline.jsx
+│   │   │   ├── hooks
+│   │   │   ├── index.jsx
+│   │   │   ├── pages
+│   │   │   │   └── DashboardExternal.jsx
+│   │   │   └── services
+│   │   ├── student
+│   │   │   ├── components
+│   │   │   │   ├── ActiveProjects.jsx
+│   │   │   │   ├── MyProjects.jsx
+│   │   │   │   ├── ParticipationSummary.jsx
+│   │   │   │   ├── RecentActivity.jsx
+│   │   │   │   ├── TaskList.jsx
+│   │   │   │   └── Timeline.jsx
+│   │   │   ├── hooks
+│   │   │   ├── index.jsx
+│   │   │   ├── pages
+│   │   │   │   └── DashboardStudent.jsx
+│   │   │   └── services
+│   │   └── teacher
 │   ├── landing
 │   │   ├── components
 │   │   │   ├── GoogleBtn.jsx
@@ -123,4 +139,4 @@
     ├── index.css
     └── tailwindcss
 
-35 directories, 89 files
+42 directories, 98 files
