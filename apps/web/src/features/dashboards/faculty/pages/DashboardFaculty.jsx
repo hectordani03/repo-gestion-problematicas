@@ -1,16 +1,18 @@
-import ProjectStats from '../components/ExternalProjectStats'
-import RequestedProjects from '../components/RequestedProjects'
+import ProjectStats from '../components/FacultyProjectStats'
+import ProjectList from '../components/PendingRequests'
 import Projects from '../../shared/components/Projects'
-import RecentActivity from '../components/RecentActivity'
-import ProjectSummary from '../components/ProjectSummary'
+import UploadedDocuments from '../components/UploadedDocuments'
+import LinkedStudents from '../components/LinkedStudents'
+// import Timeline from '@/features/dashboards/dashboard/components/Timeline'
 
 
-const DashboardExternal = () => {
+const DashboardFaculty = () => {
   const handleProjectDetails = (project) => {
     console.log('Ver detalles del proyecto:', project)
     // TODO: Implementar navegación a la página de detalles del proyecto
   }
 
+  // Función para manejar el contacto con estudiantes
   const handleContactStudents = (project) => {
     console.log('Contactar estudiantes del proyecto:', project)
     // TODO: Implementar funcionalidad de contacto
@@ -22,26 +24,27 @@ const DashboardExternal = () => {
         <ProjectStats />
       </div>
       <div className="col-span-3 lg:col-span-1">
-        <RequestedProjects />
+        <ProjectList />
         <div className='mt-5'>
-          <ProjectSummary />
+          <LinkedStudents />
         </div>
       </div>
       <div className="col-span-3 lg:col-span-2 grid gap-4">
         <Projects
-            dashboardType="external"
+            dashboardType="faculty"
             onProjectClick={handleProjectDetails}
             onContactStudents={handleContactStudents}
             onUploadComment={(project) => console.log('Subir comentario para el proyecto:', project)}
             onViewDeliverables={(project) => console.log('Ver entregables del proyecto:', project)}
           />
-        <div className=" gap-4">
-          <RecentActivity />
+        <div className="grid gap-4">
+          <UploadedDocuments />
         </div>
       </div>
     </div>
+    {/* <Timeline /> */}
     </>
   )
 }
 
-export default DashboardExternal
+export default DashboardFaculty

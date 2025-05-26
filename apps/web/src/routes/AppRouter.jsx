@@ -44,7 +44,8 @@ const AppRouter = () => {
             para eso en la API) */}
         {/* <Route path="/dashboard" element={<DashboardMain />} /> */}
         <Route path="/dashboard" element={<DashboardExternal />} />
-        <Route path="/dashboard-student" element={<DashboardStudent />} />
+        <Route path="/dashboard/student" element={<DashboardStudent />} />
+        <Route path="/dashboard/faculty" element={<DashboardFaculty />} />
         {/* Aquí puedes anidar más rutas como /dashboard/proyectos */}
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/request-project" element={<RequestProject />} />

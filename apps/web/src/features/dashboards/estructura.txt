@@ -1,0 +1,59 @@
+dashboards
+|
+├── external
+│   ├── components
+│   │   ├── ExternalProjectStats.jsx
+│   │   ├── ProjectSummary.jsx
+│   │   ├── RecentActivity.jsx
+│   │   ├── RecentProjects.jsx
+│   │   └── RequestedProjects.jsx
+│   ├── hooks
+│   │   ├── useExternalStats.js
+│   │   ├── useProjectSummary.js
+│   │   ├── useRecentActivity.js
+│   │   └── useRequestedProjects.js
+│   ├── index.jsx
+│   ├── pages
+│   │   └── DashboardExternal.jsx
+│   ├── services
+│   └── utils
+│       └── RecentActivityUtils.jsx
+├── faculty
+│   ├── components
+│   │   ├── FacultyProjectStats.jsx
+│   │   ├── LinkedStudents.jsx
+│   │   ├── ProjectList.jsx
+│   │   ├── RecentProjects.jsx
+│   │   ├── Timeline.jsx
+│   │   └── UploadedDocuments.jsx
+│   ├── hooks
+│   │   └── useFacultyStats.js
+│   ├── index.jsx
+│   ├── pages
+│   │   └── DashboardFaculty.jsx
+│   └── services
+├── shared
+│   ├── components
+│   │   ├── ProjectStats.jsx
+│   │   └── StatCard.jsx
+│   ├── constants
+│   │   └── icons.jsx
+│   └── hooks
+│       └── useProjectStats.js
+└── student
+    ├── components
+    │   ├── ActiveProjects.jsx
+    │   ├── MyProjects.jsx
+    │   ├── ParticipationSummary.jsx
+    │   ├── RecentActivity.jsx
+    │   └── StudentTasks.jsx
+    ├── hooks
+    │   ├── useActiveProjects.js
+    │   ├── useParticipationSummaryData.jsx
+    │   └── useStudentTasks.js
+    ├── index.jsx
+    ├── pages
+    │   └── DashboardStudent.jsx
+    ├── services
+    └── utils
+        └── getStatusColor.js
