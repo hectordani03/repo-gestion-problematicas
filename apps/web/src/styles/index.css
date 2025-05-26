@@ -7,13 +7,53 @@ textarea {
 }
 
 .large-text {
-  font-size: 1.1rem;
+  font-size: 1.15rem;
 }
 
-.high-contrast {
-  filter: contrast(150%) saturate(150%);
+/* Alto contraste */
+.high-contrast li .flex,
+.high-contrast label,
+.high-contrast button.pb-2 ,
+.high-contrast label.mb-2,
+.high-contrast span,
+.high-contrast h1,
+.high-contrast h2,
+.high-contrast h3,
+.high-contrast h4 {
+  color: #00ffff; 
+}
+
+.high-contrast,
+.high-contrast div.flex,
+.high-contrast p,
+.high-contrast input,
+.high-contrast .bg-white,
+.high-contrast button.px-4,
+.high-contrast button.px-6,
+.high-contrast .flex.flex-col,
+.high-contrast .flex.items-center,
+.high-contrast span.text-gray-700,
+.high-contrast textarea {
+  background-color: #000000;
+  color: #ffff00;
+}
+.high-contrast a.inline-block{
+  font-weight: bold;
+  color: #00ffff;
+  background-color: #352e25;
+}
+.high-contrast form,
+.high-contrast .bg-gray-100,
+.high-contrast button.px-4,
+.high-contrast button.px-6,
+.high-contrast button.ml-4,
+.high-contrast button.px-5{
+  background-color: #1a1818;
 }
 
 .dyslexia-font {
-  font-family: 'OpenDyslexic', Arial, sans-serif;
+  font-family: 'OpenDyslexic', 'OpenDyslexicAlta', 'Arial Rounded MT Bold', Arial, sans-serif;
+  letter-spacing: 0.03em;
+  line-height: 1.6;
+  font-weight:bold;
 }
