@@ -1,13 +1,14 @@
 import { comparePasswords } from "../libs/auth/hashPassword.js";
 import { generateAccessToken, generateRefreshToken } from "../libs/auth/jwt.js";
 import { userRepo } from "@reuc/infrastructure/userRepo.js";
+import { ConflictError } from "../errors/ConflictError.js";
 
 export async function loginUser({ email, password, ip, userAgent }) {
   const user = await userRepo.findByEmail(email);
-  if (!user) throw new Error("Correo o contraseña no valido");
+  if (!user) throw new ConflictError("Correo o contraseña no valido");
 
   const valid = await comparePasswords(password, user.password);
-  if (!valid) throw new Error("Correo o contraseña no valido");
+  if (!valid) throw new ConflictError("Correo o contraseña no valido");
 
   const updated = await updateLastLogin(user.uuid_user, ip);
 

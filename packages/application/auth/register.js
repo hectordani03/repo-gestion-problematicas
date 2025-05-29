@@ -6,6 +6,7 @@ import {
 import { validateUniversityId } from "../shared/validators.js";
 import { ValidationError } from "../errors/ValidationError.js";
 import { registerUser } from "@reuc/domain/user/registerUser.js";
+import { ConflictError } from "@reuc/domain/errors/ConflictError.js";
 
 export async function register({ body, ip, userAgent }) {
   try {
@@ -34,6 +35,8 @@ export async function register({ body, ip, userAgent }) {
 
     return { user: safeUser, tokens: { accessToken, refreshToken } };
   } catch (error) {
+    if (error instanceof ConflictError)
+      throw new ValidationError(error.message);
     throw error;
   }
 }
