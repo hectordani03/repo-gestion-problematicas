@@ -1,57 +1,102 @@
 // apps/mobile/src/components/MainHeader.tsx
 
-import React from 'react'
+import React, { useState } from 'react'
 import { View, Text, TextInput, TouchableOpacity, Image } from 'react-native'
 import { Ionicons } from '@expo/vector-icons'
 import { MainHeaderStyles as styles } from '../styles/components/header/MainHeader.styles'
+import LeftSidebar from './LeftSidebar'
+import RightSidebar from './RightSidebar'
 import avatar from '../assets/avatar.png' 
 
 type Props = {
-  onProfilePress?: () => void
   onSearchChange?: (text: string) => void
   searchValue?: string
+  onNavigate?: (screen: string) => void
+  userEmail?: string
+  userAvatar?: any
 }
 
 export default function MainHeader({
-  onProfilePress,
   onSearchChange,
   searchValue,
+  onNavigate,
+  userEmail,
+  userAvatar,
 }: Props) {
+  const [isSidebarVisible, setIsSidebarVisible] = useState(false)
+  const [isRightSidebarVisible, setIsRightSidebarVisible] = useState(false)
+
+  const toggleSidebar = () => {
+    setIsSidebarVisible(!isSidebarVisible)
+  }
+
+  const toggleRightSidebar = () => {
+    setIsRightSidebarVisible(!isRightSidebarVisible)
+  }
+
   return (
-    <View style={styles.container}>
-      <View style={styles.topRow}>
-        <Text style={styles.logo}>
-          Re<Text style={{ color: styles.logo.color }}>UC</Text>
-        </Text>
-        <TouchableOpacity
-          style={styles.profileBtn}
-          onPress={onProfilePress}
-        >
-          <Image
-            source={avatar}
-            style={{
-              width: styles.profileBtn.width,
-              height: styles.profileBtn.height,
-              borderRadius: styles.profileBtn.borderRadius,
-            }}
+    <>
+      <View style={styles.container}>
+        <View style={styles.topRow}>
+          <View style={styles.leftSection}>
+            <TouchableOpacity
+              style={styles.hamburgerBtn}
+              onPress={toggleSidebar}
+            >
+              <Ionicons
+                name="menu"
+                size={24}
+                style={styles.hamburgerIcon}
+              />
+            </TouchableOpacity>
+            <Text style={styles.logo}>
+              Re<Text style={{ color: styles.logo.color }}>UC</Text>
+            </Text>
+          </View>
+          <TouchableOpacity
+            style={styles.profileBtn}
+            onPress={toggleRightSidebar}
+          >
+            <Image
+              source={userAvatar || avatar}
+              style={{
+                width: styles.profileBtn.width,
+                height: styles.profileBtn.height,
+                borderRadius: styles.profileBtn.borderRadius,
+              }}
+            />
+          </TouchableOpacity>
+        </View>
+
+        <View style={styles.searchContainer}>
+          <Ionicons
+            name="search-outline"
+            size={20}
+            style={styles.searchIcon}
           />
-        </TouchableOpacity>
+          <TextInput
+            style={styles.searchInput}
+            placeholder="Buscar proyectos..."
+            placeholderTextColor={styles.searchIcon.color}
+            value={searchValue}
+            onChangeText={onSearchChange}
+          />
+        </View>
       </View>
 
-      <View style={styles.searchContainer}>
-        <Ionicons
-          name="search-outline"
-          size={20}
-          style={styles.searchIcon}
-        />
-        <TextInput
-          style={styles.searchInput}
-          placeholder="Buscar proyectos..."
-          placeholderTextColor={styles.searchIcon.color}
-          value={searchValue}
-          onChangeText={onSearchChange}
-        />
-      </View>
-    </View>
+      <LeftSidebar
+        isVisible={isSidebarVisible}
+        onClose={() => setIsSidebarVisible(false)}
+        onNavigate={onNavigate}
+      />
+
+      <RightSidebar
+        isVisible={isRightSidebarVisible}
+        onClose={() => setIsRightSidebarVisible(false)}
+        onNavigate={onNavigate}
+        userEmail={userEmail}
+        userAvatar={userAvatar}
+      />
+    </>
   )
 }

@@ -2,8 +2,8 @@
 
 import React from 'react'
 import { View } from 'react-native'
-import DashboardTabs from '../components/DashboardTabs'
-import { DashboardMainStyles as styles } from '../../../styles'
+import DashboardTabs from './DashboardTabs'
+import { DashboardMainStyles as styles } from '../../../../styles'
 
 export default function DashboardMain() {
   return (

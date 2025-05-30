@@ -8,6 +8,5 @@ export const DashboardMainStyles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: palette.background,  
-    paddingVertical: spacing.md,
   },
 })

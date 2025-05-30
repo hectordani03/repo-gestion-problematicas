@@ -7,7 +7,7 @@ import { spacing } from '../theme/spacing'
 export const DashboardLayoutStyles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: palette.background, // '#FFFFFF'
+    backgroundColor: palette.background, 
   },
   content: {
     flex: 1,

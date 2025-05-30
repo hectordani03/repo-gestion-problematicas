@@ -18,6 +18,17 @@ export const MainHeaderStyles = StyleSheet.create({
     justifyContent: 'space-between',
     marginBottom: spacing.sm,            // separación al search bar
   },
+  leftSection: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  hamburgerBtn: {
+    padding: spacing.xs,                 // 8
+    marginRight: spacing.xs,             // 8
+  },
+  hamburgerIcon: {
+    color: palette.text,                 // negro
+  },
   logo: {
     fontSize: typography.xl2,            // 24
     fontWeight: '900',
