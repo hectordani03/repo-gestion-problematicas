@@ -4,12 +4,14 @@ export class Outsider {
     uuidUser,
     organizationName = undefined,
     phoneNumber = undefined,
+    location = undefined,
   }) {
     this.uuidUser = uuidUser;
 
     this.uuid_outsider = uuid_outsider;
     this.organizationName = organizationName;
     this.phoneNumber = phoneNumber;
+    this.location = location;
   }
 
   static allowedFields = [
@@ -17,6 +19,7 @@ export class Outsider {
     "uuidUser",
     "organizationName",
     "phoneNumber",
+    "location",
   ];
 
   toPrimitives() {
