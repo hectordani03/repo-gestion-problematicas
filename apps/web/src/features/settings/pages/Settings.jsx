@@ -133,7 +133,7 @@ const Settings = () => {
     <button
       onClick={() => onChange(!value)}
       className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
-        value ? 'bg-blue-600' : 'bg-gray-300'
+        value ? 'bg-lime-600' : 'bg-gray-300'
       }`}
     >
       <span
@@ -148,7 +148,7 @@ const Settings = () => {
     <select
       value={value}
       onChange={(e) => onChange(e.target.value)}
-      className="bg-white border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+      className="bg-white border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-lime-500"
     >
       {options.map(option => (
         <option key={option} value={option}>{option}</option>
@@ -192,7 +192,7 @@ const Settings = () => {
                       onClick={() => setActiveSection(section.id)}
                       className={`w-full flex items-center gap-3 px-3 py-2 rounded-md text-left transition-colors ${
                         activeSection === section.id
-                          ? 'bg-blue-50 text-blue-700'
+                          ? 'bg-lime-50 text-lime-700'
                           : 'text-gray-600 hover:bg-gray-100'
                       }`}
                     >
@@ -212,7 +212,7 @@ const Settings = () => {
                       onClick={() => setActiveSection(section.id)}
                       className={`w-full flex items-center gap-3 px-3 py-2 rounded-md text-left transition-colors ${
                         activeSection === section.id
-                          ? 'bg-blue-50 text-blue-700'
+                          ? 'bg-lime-50 text-lime-700'
                           : 'text-gray-600 hover:bg-gray-100'
                       }`}
                     >
