@@ -3,11 +3,14 @@
 import React from 'react'
 import { View, Text, TouchableOpacity, ScrollView, ActivityIndicator } from 'react-native'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
-import { RequestedProjectsStyles as styles } from '../../../../styles/components/dashboard/dashboardComponents.styles'
+import { useThemedStyles, useThemedPalette } from '../../../../hooks/useThemedStyles'
+import { createRequestedProjectsStyles } from '../../../../styles/components/dashboard/dashboardComponents.styles'
 import { palette } from '../../../../styles/theme/colors'
 import { useRequestedProjects, FilterType } from '../hooks/useRequestedProjects'
 
 const RequestedProjects: React.FC = () => {
+    const styles = useThemedStyles(createRequestedProjectsStyles)
+    const palette = useThemedPalette()
   const {
     loading,
     filter,

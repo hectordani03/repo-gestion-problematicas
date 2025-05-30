@@ -3,7 +3,8 @@
 import React, { useState } from 'react'
 import { View, Text, TextInput, TouchableOpacity, Image } from 'react-native'
 import { Ionicons } from '@expo/vector-icons'
-import { MainHeaderStyles as styles } from '../styles/components/header/MainHeader.styles'
+import { createMainHeaderStyles } from '../styles/components/header/MainHeader.styles'
+import { useThemedStyles, useThemedPalette } from '../hooks/useThemedStyles'
 import LeftSidebar from './LeftSidebar'
 import RightSidebar from './RightSidebar'
 import avatar from '../assets/avatar.png' 
@@ -23,6 +24,8 @@ export default function MainHeader({
   userEmail,
   userAvatar,
 }: Props) {
+  const styles = useThemedStyles(createMainHeaderStyles)
+  const palette = useThemedPalette()
   const [isSidebarVisible, setIsSidebarVisible] = useState(false)
   const [isRightSidebarVisible, setIsRightSidebarVisible] = useState(false)
 
@@ -77,7 +80,7 @@ export default function MainHeader({
           <TextInput
             style={styles.searchInput}
             placeholder="Buscar proyectos..."
-            placeholderTextColor={styles.searchIcon.color}
+            placeholderTextColor={palette.textSecondary}
             value={searchValue}
             onChangeText={onSearchChange}
           />

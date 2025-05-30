@@ -14,7 +14,10 @@ import {
   Switch,
 } from 'react-native'
 import { Ionicons, MaterialIcons } from '@expo/vector-icons'
-import { RightSidebarStyles as styles } from '../styles/components/header/RightSidebar.styles'
+import { useThemedStyles } from '../hooks/useThemedStyles'
+import { createRightSidebarStyles } from '../styles/components/header/RightSidebar.styles'
+import { useTheme } from '../context/ThemeContext' 
+
 type Props = {
   isVisible: boolean
   onClose: () => void
@@ -40,69 +43,44 @@ type AccessibilityItem = {
 }
 
 const menuItems: MenuItem[] = [
-  {
-    icon: 'person-outline',
-    iconType: 'ionicons',
-    label: 'Mi perfil',
-    screen: 'Profile',
-  },
-  {
-    icon: 'accessibility-outline',
-    iconType: 'ionicons',
-    label: 'Accesibilidad',
-    screen: 'Accessibility',
-    hasSubmenu: true,
-  },
-  {
-    icon: 'settings-outline',
-    iconType: 'ionicons',
-    label: 'Configuración',
-    screen: 'Settings',
-  },
-  {
-    icon: 'help-circle-outline',
-    iconType: 'ionicons',
-    label: 'Ayuda',
-    screen: 'Help',
-  },
+  { icon: 'person-outline', iconType: 'ionicons', label: 'Mi perfil', screen: 'Profile' },
+  { icon: 'accessibility-outline', iconType: 'ionicons', label: 'Accesibilidad', screen: 'Accessibility', hasSubmenu: true },
+  { icon: 'settings-outline', iconType: 'ionicons', label: 'Configuración', screen: 'Settings' },
+  { icon: 'help-circle-outline', iconType: 'ionicons', label: 'Ayuda', screen: 'Help' },
 ]
 
 const accessibilityItems: AccessibilityItem[] = [
-  {
-    icon: 'moon-outline',
-    iconType: 'ionicons',
-    label: 'Modo Oscuro',
-    setting: 'darkMode',
-    hasToggle: true,
-  },
-  {
-    icon: 'contrast-outline',
-    iconType: 'ionicons',
-    label: 'Alto Contraste',
-    setting: 'highContrast',
-    hasToggle: true,
-  },
-  {
-    icon: 'text-outline',
-    iconType: 'ionicons',
-    label: 'Cambio de Fuente',
-    setting: 'fontChange',
-  },
+  { icon: 'moon-outline', iconType: 'ionicons', label: 'Modo Oscuro', setting: 'darkMode', hasToggle: true },
+  { icon: 'contrast-outline', iconType: 'ionicons', label: 'Alto Contraste', setting: 'highContrast', hasToggle: true },
+  { icon: 'text-outline', iconType: 'ionicons', label: 'Cambio de Fuente', setting: 'fontChange' },
 ]
 
-export default function RightSidebar({ 
-  isVisible, 
-  onClose, 
+export default function RightSidebar({
+  isVisible,
+  onClose,
   onNavigate,
   userEmail = 'usuario@ejemplo.com',
   userAvatar
 }: Props) {
+  const styles = useThemedStyles(createRightSidebarStyles)
   const slideAnim = useRef(new Animated.Value(Dimensions.get('window').width)).current
   const [expandedMenus, setExpandedMenus] = useState<string[]>([])
+  // Utiliza los nuevos valores del contexto
+  const { themeMode, setThemeMode, isDarkMode, isHighContrast } = useTheme()
+
+  // Refleja el estado del contexto en los switches
   const [accessibilitySettings, setAccessibilitySettings] = useState({
-    darkMode: false,
-    highContrast: false,
+    darkMode: themeMode === 'dark',
+    highContrast: themeMode === 'highContrast',
   })
+
+  // Mantiene los switches sincronizados con el contexto
+  useEffect(() => {
+    setAccessibilitySettings({
+      darkMode: themeMode === 'dark',
+      highContrast: themeMode === 'highContrast',
+    })
+  }, [themeMode])
 
   useEffect(() => {
     if (isVisible) {
@@ -121,18 +99,20 @@ export default function RightSidebar({
   }, [isVisible])
 
   const toggleSubmenu = (screen: string) => {
-    setExpandedMenus(prev => 
-      prev.includes(screen) 
+    setExpandedMenus(prev =>
+      prev.includes(screen)
         ? prev.filter(s => s !== screen)
         : [...prev, screen]
     )
   }
 
   const toggleAccessibilitySetting = (setting: string) => {
-    setAccessibilitySettings(prev => ({
-      ...prev,
-      [setting]: !prev[setting as keyof typeof prev]
-    }))
+    if (setting === 'darkMode') {
+      setThemeMode(themeMode === 'dark' ? 'light' : 'dark')
+    }
+    if (setting === 'highContrast') {
+      setThemeMode(themeMode === 'highContrast' ? 'light' : 'highContrast')
+    }
   }
 
   const renderIcon = (item: MenuItem) => {
@@ -154,11 +134,12 @@ export default function RightSidebar({
     )
   }
 
-  const handleMenuPress = (item: MenuItem) => {
-    if (item.hasSubmenu) {
+  const handleMenuPress = (item: MenuItem | string) => {
+    let screen = typeof item === "string" ? item : item.screen
+    if (typeof item !== "string" && item.hasSubmenu) {
       toggleSubmenu(item.screen)
     } else {
-      onNavigate?.(item.screen)
+      onNavigate?.(screen)
       onClose()
     }
   }
@@ -170,45 +151,47 @@ export default function RightSidebar({
     }
   }
 
-  const renderAccessibilitySubmenu = () => {
-    return (
-      <View style={styles.submenuContainer}>
-        {accessibilityItems.map((item, index) => (
-          <TouchableOpacity
-            key={index}
-            style={styles.submenuItem}
-            onPress={() => handleAccessibilityPress(item.setting)}
-          >
-            <View style={styles.submenuItemContent}>
-              {item.iconType === 'ionicons' ? (
-                <Ionicons
-                  name={item.icon as any}
-                  size={20}
-                  style={styles.submenuIcon}
-                />
-              ) : (
-                <MaterialIcons
-                  name={item.icon as any}
-                  size={20}
-                  style={styles.submenuIcon}
-                />
-              )}
-              <Text style={styles.submenuText}>{item.label}</Text>
-            </View>
-            {item.hasToggle && (
-              <Switch
-                value={accessibilitySettings[item.setting as keyof typeof accessibilitySettings]}
-                onValueChange={() => toggleAccessibilitySetting(item.setting)}
-                trackColor={{ false: styles.switchTrack.color, true: styles.switchTrackActive.color }}
-                thumbColor={styles.switchThumb.color}
-                style={styles.switch}
+  const renderAccessibilitySubmenu = () => (
+    <View style={styles.submenuContainer}>
+      {accessibilityItems.map((item, index) => (
+        <TouchableOpacity
+          key={index}
+          style={styles.submenuItem}
+          onPress={() => handleAccessibilityPress(item.setting)}
+        >
+          <View style={styles.submenuItemContent}>
+            {item.iconType === 'ionicons' ? (
+              <Ionicons
+                name={item.icon as any}
+                size={20}
+                style={styles.submenuIcon}
+              />
+            ) : (
+              <MaterialIcons
+                name={item.icon as any}
+                size={20}
+                style={styles.submenuIcon}
               />
             )}
-          </TouchableOpacity>
-        ))}
-      </View>
-    )
-  }
+            <Text style={styles.submenuText}>{item.label}</Text>
+          </View>
+          {item.hasToggle && (
+            <Switch
+              value={accessibilitySettings[item.setting as keyof typeof accessibilitySettings]}
+              onValueChange={() => toggleAccessibilitySetting(item.setting)}
+              trackColor={{ false: styles.switchTrack.color, true: styles.switchTrackActive.color }}
+              thumbColor={styles.switchThumb.color}
+              style={styles.switch}
+              disabled={
+                (item.setting === 'darkMode' && accessibilitySettings.highContrast) ||
+                (item.setting === 'highContrast' && accessibilitySettings.darkMode)
+              }
+            />
+          )}
+        </TouchableOpacity>
+      ))}
+    </View>
+  )
 
   return (
     <Modal
@@ -220,7 +203,7 @@ export default function RightSidebar({
       <TouchableWithoutFeedback onPress={onClose}>
         <View style={styles.overlay}>
           <TouchableWithoutFeedback>
-            <Animated.View 
+            <Animated.View
               style={[
                 styles.sidebar,
                 {
@@ -233,7 +216,7 @@ export default function RightSidebar({
                 <TouchableOpacity onPress={onClose} style={styles.closeButton}>
                   <Ionicons name="close" size={24} style={styles.closeIcon} />
                 </TouchableOpacity>
-                
+
                 <View style={styles.profileContainer}>
                   <Image
                     source={userAvatar || require('../assets/avatar.png')}
@@ -267,7 +250,7 @@ export default function RightSidebar({
               </ScrollView>
 
               {/* Logout Button */}
-              <TouchableOpacity 
+              <TouchableOpacity
                 style={styles.logoutButton}
                 onPress={() => handleMenuPress('Logout')}
               >

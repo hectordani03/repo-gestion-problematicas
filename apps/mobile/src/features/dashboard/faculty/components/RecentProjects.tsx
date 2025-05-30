@@ -3,11 +3,14 @@
 import React from 'react'
 import { View, Text, TouchableOpacity, ScrollView } from 'react-native'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
-import { RecentProjectStyles as styles } from '../../../../styles/components/dashboard/dashboardComponents.styles'
+import { useThemedStyles, useThemedPalette } from '../../../../hooks/useThemedStyles'
+import { createRecentProjectStyles } from '../../../../styles/components/dashboard/dashboardComponents.styles'
 import { palette } from '../../../../styles/theme/colors'
 import { useRecentProjects } from '../hooks/useRecentProjects'
 
 const RecentProjects: React.FC = () => {
+    const styles = useThemedStyles(createRecentProjectStyles)
+    const palette = useThemedPalette()
   const { 
     proyectosAsignados, 
    // estadoConfig, 

@@ -4,8 +4,10 @@ import { StyleSheet } from 'react-native'
 import { palette } from '../../theme/colors'
 import { spacing } from '../../theme/spacing'
 import { typography } from '../../theme/typography'
+import { ColorPalette } from '../../theme/colors'
 
-export const ProjectStatsStyles = StyleSheet.create({
+
+export const createProjectStatsStyles = (palette: ColorPalette, fontMode: string) => StyleSheet.create({
   heroSection: {
     backgroundColor: palette.primary,
     paddingHorizontal: spacing.lg,
@@ -20,6 +22,8 @@ export const ProjectStatsStyles = StyleSheet.create({
     color: palette.onPrimary,
     marginBottom: spacing.sm,
     textAlign: 'center',
+    fontFamily: fontMode === 'dyslexic' ? 'OpenDyslexic-Bold' : 'System',
+
   },
   heroSubtitle: {
     fontSize: typography.lg,
@@ -28,6 +32,8 @@ export const ProjectStatsStyles = StyleSheet.create({
     marginBottom: spacing.xl,
     opacity: 0.9,
     lineHeight: typography.lg * 1.4,
+    fontFamily: fontMode === 'dyslexic' ? 'OpenDyslexic-Bold' : 'System',
+
   },
   heroButton: {
     backgroundColor: palette.background,
@@ -188,7 +194,8 @@ export const ProjectStatsStyles = StyleSheet.create({
 })
 
 
-export const RequestedProjectsStyles = StyleSheet.create({
+export const createRequestedProjectsStyles = (palette: ColorPalette) =>
+  StyleSheet.create({
   container: {
     backgroundColor: palette.background,
     borderRadius: spacing.lg,
@@ -304,7 +311,8 @@ export const RequestedProjectsStyles = StyleSheet.create({
   },
 })
 
-export const ProjectListStyles = StyleSheet.create({
+export const createProjectListStyles = (palette: ColorPalette) =>
+  StyleSheet.create({
   container: {
     backgroundColor: palette.background,
     borderRadius: spacing.lg,
@@ -337,7 +345,8 @@ export const ProjectListStyles = StyleSheet.create({
   },
 })
 
-export const RecentProjectsStyles = StyleSheet.create({
+export const createRecentProjectsStyles = (palette: ColorPalette) =>
+  StyleSheet.create({
   container: {
     backgroundColor: palette.background,
     borderRadius: spacing.lg,
@@ -387,7 +396,8 @@ export const RecentProjectsStyles = StyleSheet.create({
   },
 })
 
-export const RecentActivityStyles = StyleSheet.create({
+export const createRecentActivityStyles = (palette: ColorPalette) =>
+  StyleSheet.create({
   container: {
     backgroundColor: palette.background,
     borderRadius: spacing.lg,
@@ -568,7 +578,8 @@ export const RecentActivityStyles = StyleSheet.create({
   },
 })
 
-export const ProjectSummaryStyles = StyleSheet.create({
+export const createProjectSummaryStyles = (palette: ColorPalette) =>
+  StyleSheet.create({
   container: {
     backgroundColor: palette.background,
     borderRadius: spacing.lg,
@@ -636,7 +647,8 @@ export const ProjectSummaryStyles = StyleSheet.create({
   },
 })
 
-export const TimelineStyles = StyleSheet.create({
+export const createTimelineStyles = (palette: ColorPalette) =>
+  StyleSheet.create({
   container: {
     backgroundColor: palette.background,
     borderRadius: spacing.lg,
@@ -674,7 +686,8 @@ export const TimelineStyles = StyleSheet.create({
   },
 })
 
-export const RecentProjectStyles = StyleSheet.create({
+export const createRecentProjectStyles = (palette: ColorPalette) =>
+  StyleSheet.create({
   container: {
     backgroundColor: palette.background,
     borderRadius: spacing.sm,
