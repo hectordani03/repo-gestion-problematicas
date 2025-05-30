@@ -14,7 +14,7 @@ export const validateRequired = (value, fieldName) => {
 
 /**
  * Valida un campo de correo electrónico.
- * @param {string} email El valor del campo de correo electrónico.
+ * @param {string} email El valor del campo de correo electrónico.cd
  * @returns {string | null} Un mensaje de error si el correo no es válido, o null si es válido.
  */
 export const validateEmail = (email) => {
