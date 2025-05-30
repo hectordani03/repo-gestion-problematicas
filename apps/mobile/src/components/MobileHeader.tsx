@@ -10,7 +10,9 @@ export default function MobileHeader() {
   return (
     <View style={styles.container}>
       <View style={styles.left}>
-        <Text style={styles.title}>ReUC</Text>
+        <TouchableOpacity onPress={() => nav.navigate('Landing')}>
+          <Text style={styles.title}>ReUC</Text>
+        </TouchableOpacity>
       </View>
 
       <View style={styles.right}>
