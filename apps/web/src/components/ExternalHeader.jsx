@@ -3,7 +3,7 @@ import headerLogo from '../assets/header-logo.png';
 export default function ExternalHeader() {
     return (
         <header className="w-full flex justify-between h-32 items-center">
-            <div className="flex items-center gap-4 ml-20">
+            <div className="flex items-center gap-4 ml-20 mt-3">
                 <img className='w-17' src={headerLogo} alt="" />
                 <a href="/" className="text-4xl font-extrabold text-lime-600">ReUC</a>
             </div>
