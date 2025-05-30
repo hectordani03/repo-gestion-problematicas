@@ -30,3 +30,15 @@ export function validateUniversityId(universityId) {
 
   return null;
 }
+
+export function validateUuid(uuid) {
+  if (
+    !/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(
+      uuid
+    )
+  ) {
+    return "El UUID no tiene un formato válido.";
+  }
+
+  return null;
+}

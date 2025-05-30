@@ -1,5 +1,5 @@
 import { ValidationError } from "../errors/ValidationError.js";
-import { validatePhone } from "../outsiders/validators.js";
+import { validatePhone } from "../outsider/validators.js";
 import { validateDate } from "../shared/validators.js";
 import { createApplication } from "@reuc/domain/application/createApplication.js";
 
