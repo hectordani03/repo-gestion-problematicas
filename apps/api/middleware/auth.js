@@ -21,3 +21,17 @@ export function authMiddleware(req, res, next) {
     return res.status(401).json({ success: false, err: "Token inválido" });
   }
 }
+
+export const requireOutsider = (req, res, next) => {
+  const [role, uuid_outsider] = req.user?.role?.split(":") || [];
+  if (role !== "outsider") {
+    return res.status(403).json({
+      success: false,
+      err: "Sin acceso a estas funcionalidades",
+    });
+  }
+
+  req.outsider = { role, uuid_outsider };
+
+  next();
+};

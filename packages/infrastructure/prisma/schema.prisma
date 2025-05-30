@@ -142,6 +142,7 @@ model Outsider {
   user             User     @relation(fields: [uuidUser], references: [uuid_user])
   organizationName String?  @map("organization_name")
   phoneNumber      String?  @map("phone_number")
+  location         String?  @map("location")
   createdAt        DateTime @default(now()) @map("created_at")
   updatedAt        DateTime @updatedAt @map("updated_at")
 

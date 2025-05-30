@@ -7,6 +7,7 @@ import dotenv from "dotenv";
 import { authRouter } from "./routes/auth.js";
 import { projectRouter } from "./routes/project.js";
 import { adminRouter } from "./routes/admin.js";
+import { profileRouter } from "./routes/profile.js";
 
 dotenv.config();
 
@@ -24,7 +25,7 @@ app.use(
     credentials: true,
   })
 );
-app.use(express.json());
+app.use(express.json({ limit: "10mb" }));
 
 // Logs all incoming requests
 app.use((req, res, next) => {
@@ -43,6 +44,9 @@ app.use("/project", projectRouter);
 
 // Rutas Admin
 app.use("/admin", adminRouter);
+
+// Rutas Outsider
+app.use("/outsider", profileRouter);
 
 // Rutas base
 app.get("/", (req, res) => {

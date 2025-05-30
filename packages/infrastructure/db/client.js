@@ -61,6 +61,11 @@ export const tableSchemas = {
       dataType: "String",
       isNullable: true,
     },
+    location: {
+      nameMapped: "location",
+      dataType: "String",
+      isNullable: true,
+    },
     createdAt: {
       nameMapped: "created_at",
       dataType: "DateTime",
