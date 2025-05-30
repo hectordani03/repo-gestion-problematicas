@@ -3,9 +3,12 @@
 import React from 'react'
 import { View } from 'react-native'
 import DashboardTabs from './DashboardTabs'
-import { DashboardMainStyles as styles } from '../../../../styles'
+import { useThemedStyles } from '../../../../hooks/useThemedStyles'
+import { createDashboardMainStyles } from '../../../../styles/screens/DashboardMain.styles'
 
 export default function DashboardMain() {
+  const styles = useThemedStyles(createDashboardMainStyles)
+
   return (
     <View style={styles.container}>
       <DashboardTabs />

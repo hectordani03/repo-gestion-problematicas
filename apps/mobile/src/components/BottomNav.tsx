@@ -4,11 +4,13 @@ import React from 'react'
 import { View, TouchableOpacity } from 'react-native'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
 import { useNavigation } from '@react-navigation/native'
-
-import { BottomNavStyles as styles } from '../styles/components/header/BottomNav.styles'
+import { useThemedStyles } from '../hooks/useThemedStyles'
+import { createBottomNavStyles } from '../styles/components/header/BottomNav.styles'
 
 export default function BottomNav() {
   const nav = useNavigation<any>()
+  const styles = useThemedStyles(createBottomNavStyles)
+
   return (
     <View style={styles.container}>
       <TouchableOpacity onPress={() => nav.navigate('Messages')}>

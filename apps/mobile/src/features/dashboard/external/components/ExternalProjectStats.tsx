@@ -1,10 +1,8 @@
-// apps/mobile/src/features/dashboards/external/components/ExternalProjectStats.tsx
-
 import React, { useRef, useState } from 'react'
 import { View, Text, ScrollView, TouchableOpacity } from 'react-native'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
-import { ProjectStatsStyles as styles } from '../../../../styles/components/dashboard/dashboardComponents.styles'
-import { palette } from '../../../../styles/theme/colors'
+import { useThemedStyles, useThemedPalette } from '../../../../hooks/useThemedStyles'
+import { createProjectStatsStyles } from '../../../../styles/components/dashboard/dashboardComponents.styles'
 import { spacing } from '../../../../styles/theme/spacing'
 import { useExternalStats } from '../hooks/useExternalStats'
 import { Dimensions } from 'react-native'
@@ -13,6 +11,9 @@ const { width: screenWidth } = Dimensions.get('window')
 const cardWidth = screenWidth * 0.7 // 70% del ancho de pantalla
 
 const ExternalProjectStats: React.FC = () => {
+  const styles = useThemedStyles(createProjectStatsStyles)
+  const palette = useThemedPalette()
+
   const { statsData } = useExternalStats()
   const scrollViewRef = useRef<ScrollView>(null)
   const [currentIndex, setCurrentIndex] = useState(0)

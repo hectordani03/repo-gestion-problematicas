@@ -13,7 +13,8 @@ import {
   Image,
 } from 'react-native'
 import { Ionicons, MaterialIcons } from '@expo/vector-icons'
-import { LeftSidebarStyles as styles } from '../styles/components/header/LeftSidebar.styles'
+import { useThemedStyles } from '../hooks/useThemedStyles'
+import { createLeftSidebarStyles } from '../styles/components/header/LeftSidebar.styles'
 
 type Props = {
   isVisible: boolean
@@ -30,54 +31,17 @@ type MenuItem = {
 }
 
 const menuItems: MenuItem[] = [
-  {
-    icon: 'list-outline',
-    iconType: 'ionicons',
-    label: 'Solicitar un proyecto',
-    screen: 'RequestProject',
-  },
-  {
-    icon: 'search-outline',
-    iconType: 'ionicons',
-    label: 'Explorar proyectos',
-    screen: 'ExploreProjects',
-  },
-  {
-    icon: 'folder-outline',
-    iconType: 'ionicons',
-    label: 'Mis proyectos',
-    screen: 'MyProjects',
-    hasSubmenu: true,
-  },
-  {
-    icon: 'star-outline',
-    iconType: 'ionicons',
-    label: 'Mis favoritos',
-    screen: 'MyFavorites',
-    hasSubmenu: true,
-  },
-  {
-    icon: 'people-outline',
-    iconType: 'ionicons',
-    label: 'Miembros',
-    screen: 'Members',
-    hasSubmenu: true,
-  },
-  {
-    icon: 'document-text-outline',
-    iconType: 'ionicons',
-    label: 'Documentos',
-    screen: 'Documents',
-  },
-  {
-    icon: 'notifications-outline',
-    iconType: 'ionicons',
-    label: 'Notificaciones',
-    screen: 'Notifications',
-  },
+  { icon: 'list-outline',      iconType: 'ionicons', label: 'Solicitar un proyecto', screen: 'RequestProject' },
+  { icon: 'search-outline',    iconType: 'ionicons', label: 'Explorar proyectos',    screen: 'ExploreProjects' },
+  { icon: 'folder-outline',    iconType: 'ionicons', label: 'Mis proyectos',         screen: 'MyProjects', hasSubmenu: true },
+  { icon: 'star-outline',      iconType: 'ionicons', label: 'Mis favoritos',         screen: 'MyFavorites', hasSubmenu: true },
+  { icon: 'people-outline',    iconType: 'ionicons', label: 'Miembros',              screen: 'Members',     hasSubmenu: true },
+  { icon: 'document-text-outline', iconType: 'ionicons', label: 'Documentos',        screen: 'Documents' },
+  { icon: 'notifications-outline', iconType: 'ionicons', label: 'Notificaciones',    screen: 'Notifications' },
 ]
 
 export default function LeftSidebar({ isVisible, onClose, onNavigate }: Props) {
+  const styles = useThemedStyles(createLeftSidebarStyles)
   const slideAnim = useRef(new Animated.Value(-Dimensions.get('window').width)).current
   const [expandedMenus, setExpandedMenus] = useState<string[]>([])
 
@@ -98,12 +62,13 @@ export default function LeftSidebar({ isVisible, onClose, onNavigate }: Props) {
   }, [isVisible])
 
   const toggleSubmenu = (screen: string) => {
-    setExpandedMenus(prev => 
-      prev.includes(screen) 
+    setExpandedMenus(prev =>
+      prev.includes(screen)
         ? prev.filter(s => s !== screen)
         : [...prev, screen]
     )
   }
+
   const renderIcon = (item: MenuItem) => {
     if (item.iconType === 'ionicons') {
       return (
@@ -133,8 +98,7 @@ export default function LeftSidebar({ isVisible, onClose, onNavigate }: Props) {
   }
 
   const renderSubmenuItems = (parentScreen: string) => {
-    // Datos de ejemplo para los submenús
-    const submenuData: Record<string, Array<{title: string, avatar?: any}>> = {
+    const submenuData: Record<string, Array<{ title: string; avatar?: any }>> = {
       MyProjects: [
         { title: 'Proyecto Alpha', avatar: require('../assets/avatar.png') },
         { title: 'Proyecto Beta', avatar: require('../assets/avatar.png') },
@@ -181,7 +145,7 @@ export default function LeftSidebar({ isVisible, onClose, onNavigate }: Props) {
       <TouchableWithoutFeedback onPress={onClose}>
         <View style={styles.overlay}>
           <TouchableWithoutFeedback>
-            <Animated.View 
+            <Animated.View
               style={[
                 styles.sidebar,
                 {

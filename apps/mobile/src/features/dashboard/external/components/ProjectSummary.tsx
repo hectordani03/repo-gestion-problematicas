@@ -3,11 +3,15 @@
 import React from 'react'
 import { View, Text, ScrollView, TouchableOpacity } from 'react-native'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
-import { ProjectSummaryStyles as styles } from '../../../../styles/components/dashboard/dashboardComponents.styles'
+import { useThemedStyles, useThemedPalette } from '../../../../hooks/useThemedStyles'
+import { createProjectSummaryStyles} from '../../../../styles/components/dashboard/dashboardComponents.styles'
 import { palette } from '../../../../styles/theme/colors'
 import { useProjectSummary } from '../hooks/useProjectSummary'
 
 const ProjectSummary: React.FC = () => {
+  const styles = useThemedStyles(createProjectSummaryStyles)
+  const palette = useThemedPalette()
+
   const { data, total } = useProjectSummary()
 
   const handleItemPress = (item: any) => {

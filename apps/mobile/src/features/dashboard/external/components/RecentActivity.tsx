@@ -3,12 +3,15 @@
 import React from 'react'
 import { View, Text, TouchableOpacity, ScrollView, ActivityIndicator } from 'react-native'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
-import { RecentActivityStyles as styles } from '../../../../styles/components/dashboard/dashboardComponents.styles'
+import { useThemedStyles, useThemedPalette } from '../../../../hooks/useThemedStyles'
+import { createRecentActivityStyles } from '../../../../styles/components/dashboard/dashboardComponents.styles'
 import { palette } from '../../../../styles/theme/colors'
 import { useRecentActivity } from '../hooks/useRecentActivity'
 import { RecentActivityUtils } from '../utils/RecentActivityUtils'
 
 const RecentActivity: React.FC = () => {
+    const styles = useThemedStyles(createRecentActivityStyles)
+    const palette = useThemedPalette()
   const { activities, loading, error, refreshActivities } = useRecentActivity()
 
   if (loading) {

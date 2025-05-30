@@ -3,21 +3,15 @@
 import React from 'react'
 import { useWindowDimensions } from 'react-native'
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs'
-import { palette } from '../../../../styles/theme/colors'
-import { DashboardTabsStyles as styles } from '../../../../styles/components/dashboard/DashboardTabs.styles'
+import { useThemedStyles, useThemedPalette } from '../../../../hooks/useThemedStyles'
+import { createDashboardTabsStyles } from '../../../../styles/components/dashboard/DashboardTabs.styles'
 
-// Componentes de External Dashboard (mismo módulo)
+// Componentes de External Dashboard
 import ExternalProjectStats from '../components/ExternalProjectStats'
 import RequestedProjects from '../components/RequestedProjects'
 import RecentActivity from '../components/RecentActivity'
 import ProjectSummary from '../components/ProjectSummary'
 import RecentProjects from '../../faculty/components/RecentProjects'
-
-// Componente de Faculty (cuando lo creemos)
-// import { RecentProjects } from '../../faculty/components/RecentProjects'
-// Placeholder para RecentProjects temporalmente
-
-
 
 type TabParamList = {
   Estadísticas: undefined
@@ -31,6 +25,8 @@ const Tab = createMaterialTopTabNavigator<TabParamList>()
 
 const DashboardTabs: React.FC = () => {
   const layout = useWindowDimensions()
+  const styles = useThemedStyles(createDashboardTabsStyles)
+  const palette = useThemedPalette()
 
   return (
     <Tab.Navigator
@@ -49,7 +45,7 @@ const DashboardTabs: React.FC = () => {
       <Tab.Screen
         name="Estadísticas"
         component={ExternalProjectStats}
-        options={{ 
+        options={{
           tabBarLabel: 'Inicio',
           tabBarAccessibilityLabel: 'Ver estadísticas del panel'
         }}
@@ -58,7 +54,7 @@ const DashboardTabs: React.FC = () => {
       <Tab.Screen
         name="Solicitudes"
         component={RequestedProjects}
-        options={{ 
+        options={{
           tabBarLabel: 'Solicitudes',
           tabBarAccessibilityLabel: 'Ver proyectos solicitados'
         }}
@@ -67,7 +63,7 @@ const DashboardTabs: React.FC = () => {
       <Tab.Screen
         name="Recientes"
         component={RecentProjects}
-        options={{ 
+        options={{
           tabBarLabel: 'Proyectos Recientes',
           tabBarAccessibilityLabel: 'Ver proyectos recientes'
         }}
@@ -76,7 +72,7 @@ const DashboardTabs: React.FC = () => {
       <Tab.Screen
         name="Actividad"
         component={RecentActivity}
-        options={{ 
+        options={{
           tabBarLabel: 'Actividad',
           tabBarAccessibilityLabel: 'Ver actividad reciente'
         }}
@@ -85,7 +81,7 @@ const DashboardTabs: React.FC = () => {
       <Tab.Screen
         name="Resumen"
         component={ProjectSummary}
-        options={{ 
+        options={{
           tabBarLabel: 'Resumen',
           tabBarAccessibilityLabel: 'Ver resumen de proyectos'
         }}
