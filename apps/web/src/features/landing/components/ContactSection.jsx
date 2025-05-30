@@ -124,7 +124,7 @@ const ContactSection = () => {
 
   return (
     <section className="px-10 py-16 bg-white dark:bg-gray-900" id="contacto">
-      <div className="max-w-6xl mx-auto">
+      <div className="mx-20">
         <h2 className="text-4xl font-bold mb-3 text-gray-900 dark:text-white">Contáctanos</h2>
         <p className="text-xl text-gray-700 dark:text-gray-300 mb-10">
           ¿Tienes preguntas, sugerencias o necesitas más información?{' '}
@@ -225,29 +225,29 @@ const ContactSection = () => {
             <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-6">Informacion de contacto adicional</h3>
             <div className="space-y-4 text-gray-700 dark:text-gray-300">
               <p>
-                <span className="font-semibold">Correo:</span>{' '}
+                <span className="font-bold">Correo:</span>{' '}
                 <a href="mailto:reuc@ucol.mx" className="text-lime-700 hover:underline">reuc@ucol.mx</a>
               </p>
               <p>
-                <span className="font-semibold">Teléfono:</span>{' '}
+                <span className="font-bold">Teléfono:</span>{' '}
                 <a href="mailto:reuc@ucol.mx" className="text-lime-700 hover:underline">+52 312 123 4567</a>
               </p>
               <p>
-                <span className="font-semibold">Dirección:</span>{' '}
+                <span className="font-bold">Dirección:</span>{' '}
                 <span className="text-lime-700">Universidad de Colima, Av. Universidad No. 333, Colima, Col.</span>
               </p>
-              <p className="font-semibold mt-6 mb-2">Redes sociales:</p>
+              <p className="font-bold mt-6 mb-2 text-xl">Redes sociales:</p>
               <ul className="space-y-2">
                 <li>
-                  <span className="font-semibold">Facebook:</span>{' '}
+                  <span className="font-bold">Facebook:</span>{' '}
                   <a href="https://facebook.com/REUCOficial" target="_blank" rel="noopener noreferrer" className="text-lime-700 hover:underline">REUC Oficial</a>
                 </li>
                 <li>
-                  <span className="font-semibold">Instagram:</span>{' '}
+                  <span className="font-bold">Instagram:</span>{' '}
                   <a href="https://instagram.com/reuc__ucol" target="_blank" rel="noopener noreferrer" className="text-lime-700 hover:underline">@reuc__ucol</a>
                 </li>
                 <li>
-                  <span className="font-semibold">LinkedIn:</span>{' '}
+                  <span className="font-bold">LinkedIn:</span>{' '}
                   <a href="https://linkedin.com/company/REUCUCOL" target="_blank" rel="noopener noreferrer" className="text-lime-700 hover:underline">REUC UCOL</a>
                 </li>
               </ul>

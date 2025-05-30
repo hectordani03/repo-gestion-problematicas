@@ -1,26 +1,31 @@
 // src/components/WhyReUC.jsx
 import React from 'react';
+import whyReUCllustration from '@/assets/why-reuc.png';
 
 const WhyReUC = () => {
   return (
-    <section className="py-16 px-6 w-full max-w-6xl mx-auto">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-        {/* Columna Izquierda: Ilustración */}
-        <div className="flex justify-center md:justify-start"> 
-          <img />
+    <section className="mx-auto px-6 py-16 dark:bg-slate-800 text-gray-800 dark:text-gray-200">
+      <div className="flex flex-col md:flex-row items-center justify-between gap-10 mx-20">
+        <div className="md:w-1/2 flex justify-center">
+          <img
+            src={whyReUCllustration}
+            alt="Ilustración de colaboración con la comunidad"
+            className="max-w-full h-auto rounded-lg"
+          />
         </div>
-        {/* Columna Derecha: Texto y lista */}
-        <div className="text-left"> 
-          <h2 className="text-3xl sm:text-4xl font-bold mb-4 text-gray-900 dark:text-gray-100"> ¿Por qué <span className='text-lime-700'>ReUC</span>?</h2>
-          <p className="text-base sm:text-lg text-gray-700 dark:text-gray-300 mb-6"> {/* Ajuste del tamaño del párrafo */}
-            Porque creemos que los conocimientos deben ponerse al servicio de la sociedad.
-            <br />
-            <span className='text-lime-700 font-semibold'> ReUC</span> no solo impulsa el aprendizaje práctico de los estudiantes, sino que también genera soluciones innovadoras, sustentables y accesibles para quienes enfrentan desafíos reales. Con esta plataforma:
+
+        <div className="w-11/12">
+          <h2 className="text-4xl font-extrabold mb-6">
+            ¿Por qué <span className="text-lime-700">ReUC</span>?
+          </h2>
+          <p className="text-2xl leading-relaxed mb-4">
+            Porque creemos que los conocimientos deben ponerse al servicio de la sociedad. <br />
+            <span className="text-lime-700 font-semibold">ReUC</span> no solo impulsa el aprendizaje práctico de los estudiantes, sino que también genera soluciones innovadoras, sustentables y accesibles para quienes enfrentan desafíos reales. Con esta plataforma:
           </p>
-          <ul className="list-disc list-outside ml-6 space-y-2 text-lime-700 dark:text-gray-300"> {/* Ajustes para la lista */}
-            <li className="text-base sm:text-lg">La comunidad obtiene ayuda profesional sin costo.</li> {/* Ajuste del tamaño del texto de la lista */}
-            <li className="text-base sm:text-lg">Los estudiantes adquieren experiencia aplicando lo que aprenden en las aulas.</li>
-            <li className="text-base sm:text-lg">La universidad refuerza su compromiso social.</li>
+          <ul className="list-disc list-outside ml-6 space-y-3 text-2xl text-lime-700 font-bold">
+            <li>La comunidad obtiene ayuda profesional sin costo.</li>
+            <li>Los estudiantes adquieren experiencia aplicando lo que aprenden en las aulas.</li>
+            <li>La universidad refuerza su compromiso social.</li>
           </ul>
         </div>
       </div>

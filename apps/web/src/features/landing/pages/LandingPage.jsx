@@ -9,7 +9,7 @@ import useLogout from '../../auth/hooks/useLogout';
 import { Alerts } from '@/shared/alerts';
 import BenefitsSection from '../components/BenefitsSection';
 import FAQSection from '../components/FAQSection';
-import WhatIs from '../components/Whatis';
+import WhatIs from '../components/WhatIs';
 import WhyReUC from '../components/WhyReUC';
 import HelpSection from '../components/HelpSection';
 import ContactSection from '../components/ContactSection';
@@ -33,7 +33,7 @@ const LandingPage = () => {
 
   return (
     <main className="w-full">
-      <section className="flex items-center justify-between ml-15">
+      <section className="flex items-center justify-between ml-15 h-screen">
         <div className='flex flex-col justify-center space-y-6 p-6 w-6/12 h-full'>
           <Hero />
 
