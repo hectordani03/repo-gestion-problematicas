@@ -164,9 +164,9 @@ model Application {
   user                User     @relation(fields: [uuidUser], references: [uuid_user])
   name                String
   // facultades
-  topicInterest       String   @map("topic_interest")
+  topicInterest       String?  @map("topic_interest")
   // TEMP FIELD FOR DEADLINE
-  projectType         String   @map("project_type")
+  projectType         String?  @map("project_type")
   // type                Int          @map("project_type_id")
   // projectType         Project_Type @relation(fields: [type], references: [project_type_id])
   estimatedTime       DateTime @map("estimated_time")
@@ -192,7 +192,7 @@ model Project {
   uuid_project    String       @id @default(uuid())
   uuidApplication String       @map("uuid_application")
   application     Application  @relation(fields: [uuidApplication], references: [uuid_application])
-  topicInterest   String       @map("topic_interest")
+  topicInterest   String?      @map("topic_interest")
   type            Int          @map("project_type_id")
   projectType     Project_Type @relation(fields: [type], references: [project_type_id])
   estimatedTime   String       @map("estimated_time")
