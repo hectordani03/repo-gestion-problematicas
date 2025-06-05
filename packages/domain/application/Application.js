@@ -8,8 +8,8 @@ export class Application {
     uuid_application = undefined,
     uuidUser,
     name,
-    topicInterest,
-    projectType,
+    // topicInterest,
+    // projectType,
     estimatedTime,
     description = undefined,
     extendedDescription = undefined,
@@ -18,8 +18,8 @@ export class Application {
     this.outsiderName = outsiderName;
     this.uuidUser = uuidUser;
     this.name = name;
-    this.topicInterest = topicInterest;
-    this.projectType = projectType;
+    // this.topicInterest = topicInterest;
+    // this.projectType = projectType;
     this.estimatedTime = new Date(estimatedTime);
     this.visibility = visibility;
 
@@ -47,8 +47,8 @@ export class Application {
     "outsiderName",
     "uuidUser",
     "name",
-    "topicInterest",
-    "projectType",
+    // "topicInterest",
+    // "projectType",
     "estimatedTime",
     "visibility",
     "uuid_application",
